@@ -26,29 +26,86 @@
 
 struct address
 {
-    std::string city;   // город
-    std::string Street; // улица
-    int houseNumber;    // номер дома    
-    int money;              // количество денег на счету
+    std::string city;      // город
+    std::string street;    // улица
+    int houseNumber;       // номер дома    
+    int apartmentNumber;   // номер квартиры    
+    int index;             // индекс
 };
 
-void save_money_new(person* pp, int money_new);
+void print_address(address* pp);
 
 int main()
 {
     setlocale(LC_ALL, "russian");
     
+    address p1;
+
+    std::cout << "Введите адрес 1" << std::endl;
+    std::cout << "Город : ";
+    std::cin >> p1.city;
+
+    std::cout << "Улица : ";
+    std::cin >> p1.street;
+
+    std::cout << "Номер дома : ";
+    std::cin >> p1.houseNumber;
+    // Очищаем буфер до символа новой строки, т.к. если ввести например так   1d , 
+    // то программа прочитает 1, а потом вместо d вернет 0 и завершится.
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Номер квартиры : ";
+    std::cin >> p1.apartmentNumber;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Индекс : ";
+    std::cin >> p1.index;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << std::endl;
+
+
+    address p2;
+
+    std::cout << "Введите адрес 2" << std::endl;
+    std::cout << "Город : ";
+    std::cin >> p2.city;
+
+    std::cout << "Улица : ";
+    std::cin >> p2.street;
+
+    std::cout << "Номер дома : ";
+    std::cin >> p2.houseNumber;
+    // Очищаем буфер до символа новой строки, т.к. если ввести например так   1d , 
+    // то программа прочитает 1, а потом вместо d вернет 0 и завершится.
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Номер квартиры : ";
+    std::cin >> p2.apartmentNumber;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Индекс : ";
+    std::cin >> p2.index;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << std::endl;
+
+    // Выводим на печать
+    std::cout << "Выводим на печать адрес 1" << std::endl;
+    print_address(&p1);
+    std::cout << std::endl;
+    std::cout << "Выводим на печать адрес 2" << std::endl;
+    print_address(&p2);
 
     return 0;
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+void print_address(address* pp) {
+    std::cout << "Город : " << pp->city << std::endl;
+    std::cout << "Улица : " << pp->street << std::endl;
+    std::cout << "Номер дома : " << pp->houseNumber << std::endl;
+    std::cout << "Номер квартиры : " << pp->apartmentNumber << std::endl;
+    std::cout << "Индекс : " << pp->index << std::endl;    
+}
 
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
+
