@@ -40,7 +40,6 @@
 
 #include <iostream>
 #include <locale>
-#include <string>
 
 class Calculator {
 private:
