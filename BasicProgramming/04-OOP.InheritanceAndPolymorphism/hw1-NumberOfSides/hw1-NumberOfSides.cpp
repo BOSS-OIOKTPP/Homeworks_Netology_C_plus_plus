@@ -1,39 +1,77 @@
 ﻿// hw1-NumberOfSides.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+// Задача 1. Фигуры.Количество сторон
+// В этом задании вы построите первую простую иерархию классов для заданной предметной области.
+//
+// Предметная область выглядит следующим образом : есть сущность фигура.Фигуры бывают двух типов : треугольник и четырёхугольник.
+// У фигуры есть количество сторон.Для неизвестной фигуры будем считать это количество равным нулю. У треугольника три стороны, у четырёхугольника четыре стороны.
+// У любой фигуры мы хотим узнавать количество её сторон, но мы не должны быть способны изменить количество сторон для заданной фигуры извне.
+//
+// Задача : спроектировать и реализовать классы, описывающие предметную область.
+// Продемонстрируйте их работу : создайте по одному экземпляру каждого класса и выведите информацию о количестве его сторон на консоль.
+//
+// Пример работы программы
+// Консоль
+// Количество сторон :
+// Фигура: 0
+// Треугольник : 3
+// Четырёхугольник : 4
 
 #include <iostream>
 #include <locale>
+#include <string>
 
-class Parent
-{
+
+class TPolygon {
+protected:
+    int FSides;         // Количество сторон
+    std::string FName;  // Названия фигуры
 public:
-    Parent(int a)
-    {
-        std::cout << "Создаю родителя " << a << " \n";
-    }
+    TPolygon(): FSides(0), FName("Фигура") {}    
+
+    int GetSides() { return FSides; }            
+    std::string GetName() { return FName; }
+
+    void SetSides(int ASides) { FSides = ASides; }
+    void SetName(std::string AName) { FName = AName; }
 };
 
-class Child : public Parent
-{
+// Треугольник
+class TTriangle : public TPolygon {
 public:
-    Child() : Child(5)
-    {
-        std::cout << "Создаю потомка\n";
-    }
-    Child(int a) : Parent(a)
-    {
-        std::cout << "Создаю потомка " << a << " \n";
-    }
+    TTriangle(){
+        SetSides(3);
+        SetName("Треугольник");
+    } 
+    int GetSides() { return FSides; }
+    std::string GetName() { return FName; }
 };
-int main(int argc, char** argv)
+
+// Четырёхугольник
+class TQuadrilateral : public TPolygon {
+public:
+    TQuadrilateral() {
+        SetSides(4);
+        SetName("Четырёхугольник");
+    }
+    int GetSides() { return FSides; }
+    std::string GetName() { return FName; }
+};
+
+
+int main()
 {
     setlocale(LC_ALL, "russian");
 
-    Parent parent(3);  // Создаю родителя 3
-     Child child_empty; // Создаю родителя 5
-                       // Создаю потомка 5
-                       // Создаю потомка
-    Child child_8(8);  // Создаю родителя 8
-                       // Создаю потомка 8
+    TPolygon poly;
+    TTriangle tri;
+    TQuadrilateral quad;
+
+    std::cout << "Количество сторон:" << std::endl; 
+    std::cout << poly.GetName()+": " << poly.GetSides() << std::endl;
+    std::cout << tri.GetName() + ": " << tri.GetSides() << std::endl;
+    std::cout << quad.GetName() + ": " << quad.GetSides() << std::endl;
+
+    return 0;
 }
 
