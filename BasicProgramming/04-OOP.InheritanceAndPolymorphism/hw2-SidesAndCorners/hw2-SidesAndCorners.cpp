@@ -130,7 +130,7 @@ public:
     }
 };
 
-// Прямоугольный треугольник - угол C всегда равен 90);
+// Прямоугольный треугольник - угол C всегда равен 90;
 class TTriangleRight : public TTriangle {
 public:
     TTriangleRight(int ALength_a, int ALength_b, int ALength_c, int AAngle_A, int AAngle_B) :
@@ -140,7 +140,7 @@ public:
     }
 };
 
-// Равнобедренный треугольник - стороны a и c равны, углы A и C равны);
+// Равнобедренный треугольник - стороны a и c равны, углы A и C равны;
 class TTriangleIsosceles : public TTriangle {
 public:
     TTriangleIsosceles(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B) :
@@ -180,9 +180,11 @@ public:
         FLength_a = ALength_a;
         FLength_b = ALength_b;
         FLength_c = ALength_c;
+        FLength_d = ALength_d;
         FAngle_A  = AAngle_A;
         FAngle_B  = AAngle_B;
         FAngle_C  = AAngle_C;
+        FAngle_D  = AAngle_D;
     }
     //int GetSides() { return FSides; }
     //std::string GetName() { return FName; }
@@ -202,6 +204,47 @@ public:
         std::cout << std::endl;
     }
 };
+
+// Прямоугольник
+class TQuadrilateralRect : public TQuadrilateral {
+public:
+    TQuadrilateralRect(int ALength_a, int ALength_b) :
+        TQuadrilateral(ALength_a, ALength_b, ALength_a, ALength_b, 90, 90, 90, 90)            
+    {
+        FName = "Прямоугольник";  // Переопределяем название
+    }
+};
+
+// Квадрат
+class TQuadrilateralSquare : public TQuadrilateral {
+public:
+    TQuadrilateralSquare(int ALength_a) :
+        TQuadrilateral(ALength_a, ALength_a, ALength_a, ALength_a, 90, 90, 90, 90)
+    {
+        FName = "Квадрат";  // Переопределяем название
+    }
+};
+
+// Параллелограмм
+class TQuadrilateralParallelogram : public TQuadrilateral {
+public:
+    TQuadrilateralParallelogram(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B) :
+        TQuadrilateral(ALength_a, ALength_b, ALength_a, ALength_b, AAngle_A, AAngle_B, AAngle_A, AAngle_B)
+    {
+        FName = "Параллелограмм";  // Переопределяем название
+    }
+};
+
+// Ромб
+class TQuadrilateralRhomb : public TQuadrilateral {
+public:
+    TQuadrilateralRhomb(int ALength_a, int AAngle_A, int AAngle_B) :
+        TQuadrilateral(ALength_a, ALength_a, ALength_a, ALength_a, AAngle_A, AAngle_B, AAngle_A, AAngle_B)
+    {
+        FName = "Ромб";  // Переопределяем название
+    }
+};
+
 
 // Печать
 void Print_Info(TPolygon& P) {
@@ -232,11 +275,42 @@ int main()
     // Углы : A = 60 B = 60 C = 60
     TTriangleEquilateral t4(30);
 
+    // Четырёхугольник :
+    // Стороны : a = 10 b = 20 c = 30 d = 40
+    // Углы : A = 50 B = 60 C = 70 D = 80
+    TQuadrilateral t5(10, 20, 30, 40, 50, 60, 70, 80);
+
+    // Прямоугольник :
+    // Стороны : a = 10 b = 20 c = 10 d = 20
+    // Углы : A = 90 B = 90 C = 90 D = 90
+    TQuadrilateralRect t6(10, 20);
+
+    // Квадрат :
+    // Стороны : a = 20 b = 20 c = 20 d = 20
+    // Углы : A = 90 B = 90 C = 90 D = 90
+    TQuadrilateralSquare t7(20);
     
+    // Параллелограмм :
+    // Стороны : a = 20 b = 30 c = 20 d = 30
+    // Углы : A = 30 B = 40 C = 30 D = 40
+    TQuadrilateralParallelogram t8(20, 30, 30, 40);
+
+    // Ромб :
+    // Стороны : a = 30 b = 30 c = 30 d = 30
+    // Углы : A = 30 B = 40 C = 30 D = 40
+    TQuadrilateralRhomb t9(30, 30, 40);
+
+
     Print_Info(t1);
     Print_Info(t2);
     Print_Info(t3);
     Print_Info(t4);
+    Print_Info(t5);
+    Print_Info(t6);
+    Print_Info(t7);
+    Print_Info(t8);
+    Print_Info(t9);
+
 
 
     return 0;
