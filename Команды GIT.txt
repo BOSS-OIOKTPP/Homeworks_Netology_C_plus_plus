@@ -1,0 +1,5 @@
+// Отправить в githab
+git push -u origin main
+
+// Получить из GitHub
+git pull origin main
