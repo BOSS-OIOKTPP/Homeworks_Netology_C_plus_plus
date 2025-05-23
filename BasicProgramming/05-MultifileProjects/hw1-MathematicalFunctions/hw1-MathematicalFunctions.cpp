@@ -43,7 +43,7 @@ public:
     int GetOperation() { return FOperation; }
 
     bool Checked(std::string& Err) {
-        bool ch(true);
+        bool ch{true};        
         Err = "";
         if (FOperation == 4 && FB == 0) {
              Err = "Неверный ввод!. Второе число должно быть не равно 0!";
@@ -53,7 +53,7 @@ public:
             Err = "Неверный ввод!. Второе число должно быть больше или равно 0!";
             ch = false;
         }
-        else {
+        else if (FOperation < 1 || FOperation > 5 ) {
             Err = "Некорректный номер операции!";
             ch = false;
         }
@@ -81,6 +81,7 @@ int main()
     int B{ 0 };
     int Operation{ 0 };
     std::string Err;
+    char chContinue{ 'Y' };
     bool Checked;
 
 
@@ -106,38 +107,28 @@ int main()
         do {
             std::cout << "Выберите операцию (1 - сложение, 2 вычитание, 3 - умножение, 4 - деление, 5 - возведение в степень): ";
             std::cin >> Operation;
+            std::cin.clear(); // Сбрасываем флаги ошибок, например, если ввели букву
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             NumPair.SetOperation(Operation);
 
-            // сохраняем значение в поле объекта
             Checked = NumPair.Checked(Err);
             if (Checked == false) {
                 std::cout << Err << std::endl;
             }
         } while (Checked == false);
 
-        std::cout << "Введите второе число: ";
-        std::cin >> B;
+        NumPair.Print();
+
         
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-
-        // Выводим результат на экран
-        std::cout << "num1 + num2 = " << calc.add() << std::endl;
-        std::cout << "num1 - num2 = " << calc.subtract_1_2() << std::endl;
-        std::cout << "num2 - num1 = " << calc.subtract_2_1() << std::endl;
-        std::cout << "num1 * num2 = " << calc.multiply() << std::endl;
-        std::cout << "num1 / num2 = " << calc.divide_1_2() << std::endl;
-        std::cout << "num2 / num1 = " << calc.divide_2_1() << std::endl;
-        std::cout << std::endl;
-        std::cout << "Для повторного продолжения нажмите - 'Y'" << std::endl;
-
+        std::cout << "Для повторного продолжения нажмите - 'Y' или 'y' : ";
         std::cin >> chContinue;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Очищаем буфер до символа новой строки
 
-        if (chContinue != 'Y') {
+        if (chContinue != 'Y' && chContinue != 'y') {
             break;
         }
     }
+
+    return 0;
 }
 
