@@ -125,12 +125,12 @@ public:
     std::string GetName() { return FName; }
 
     // Проверка 
-    virtual std::string Check() { return varStateStrTrue; }
+    virtual bool Check() { return true; }
 
     // Печать
     virtual void Print() {
         std::cout << GetName() + " :" << std::endl;
-        std::cout << Check() << std::endl;
+        std::cout << (Check()==true ? varStateStrTrue : varStateStrFalse) << std::endl;
         std::cout << "Количество сторон : " << GetSides() << std::endl;
         std::cout << std::endl;
     }
@@ -165,14 +165,13 @@ public:
     int GetAngle_B() { return FAngle_B; }
     int GetAngle_C() { return FAngle_C; }
 
-
     // Проверку проводим по сумме углов 
-    virtual std::string Check() { return (FAngle_A + FAngle_B + FAngle_C == 180) ? varStateStrTrue : varStateStrFalse; }
+    virtual bool Check() { return (FAngle_A + FAngle_B + FAngle_C == 180); }
      
     // Печать
     virtual void Print() {
         std::cout << GetName() + " :" << std::endl;
-        std::cout << Check() << std::endl;
+        std::cout << (Check() == true ? varStateStrTrue : varStateStrFalse) << std::endl;
         std::cout << "Количество сторон : " << GetSides() << std::endl;
         std::cout << "Стороны :" << " a = " << GetLength_a() << " b = " << GetLength_b() << " c = " << GetLength_c() << std::endl;
         std::cout << "Углы :" << " A = " << GetAngle_A() << " B = " << GetAngle_B() << " C = " << GetAngle_C() << std::endl;
@@ -247,12 +246,12 @@ public:
     int GetAngle_D() { return FAngle_D; }
 
     // Проверку проводим по сумме углов 
-    virtual std::string Check() { return (FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360) ? varStateStrTrue : varStateStrFalse; }
+    virtual bool Check() { return (FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360); }
 
     // Печать
     virtual void Print() {
         std::cout << GetName() + " :" << std::endl;
-        std::cout << Check() << std::endl;
+        std::cout << (Check() == true ? varStateStrTrue : varStateStrFalse) << std::endl;
         std::cout << "Количество сторон : " << GetSides() << std::endl;
         std::cout << "Стороны :" << " a = " << GetLength_a() << " b = " << GetLength_b() << " c = " << GetLength_c() << " d = " << GetLength_d() << std::endl;
         std::cout << "Углы :" << " A = " << GetAngle_A() << " B = " << GetAngle_B() << " C = " << GetAngle_C() << " D = " << GetAngle_D() << std::endl;

@@ -31,17 +31,14 @@ public:
 
     int GetSides() { return FSides; }            
     std::string GetName() { return FName; }
-
-    void SetSides(int ASides) { FSides = ASides; }
-    void SetName(std::string AName) { FName = AName; }
 };
 
 // Треугольник
 class TTriangle : public TPolygon {
 public:
     TTriangle(){
-        SetSides(3);
-        SetName("Треугольник");
+        FSides=3; 
+        FName="Треугольник";        
     } 
     int GetSides() { return FSides; }
     std::string GetName() { return FName; }
@@ -51,8 +48,8 @@ public:
 class TQuadrilateral : public TPolygon {
 public:
     TQuadrilateral() {
-        SetSides(4);
-        SetName("Четырёхугольник");
+        FSides = 4;
+        FName = "Четырёхугольник";
     }
     int GetSides() { return FSides; }
     std::string GetName() { return FName; }
