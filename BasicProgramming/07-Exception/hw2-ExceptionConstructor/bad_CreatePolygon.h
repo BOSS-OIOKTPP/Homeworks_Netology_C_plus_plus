@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 class bad_CreatePolygon : public std::exception {
 public:

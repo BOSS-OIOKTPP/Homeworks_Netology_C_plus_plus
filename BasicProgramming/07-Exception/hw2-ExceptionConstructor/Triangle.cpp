@@ -4,7 +4,7 @@
 
 // Треугольник
 TTriangle::TTriangle(int ALength_a, int ALength_b, int ALength_c,
-        int AAngle_A, int AAngle_B, int AAngle_C) {
+        int AAngle_A, int AAngle_B, int AAngle_C, bool Checked) {
     FSides = 3;
     FName = "Треугольник";
     FLength_a = ALength_a;
@@ -15,7 +15,7 @@ TTriangle::TTriangle(int ALength_a, int ALength_b, int ALength_c,
     FAngle_C = AAngle_C;
 
     std::string ErrText;
-    if (!Check(ErrText)) { throw bad_CreatePolygon(ErrText); }
+    if (Checked && !Check(ErrText)) { throw bad_CreatePolygon(ErrText); }
 }
 
 int TTriangle::GetLength_a() { return FLength_a; }
@@ -26,7 +26,7 @@ int TTriangle::GetAngle_B() { return FAngle_B; }
 int TTriangle::GetAngle_C() { return FAngle_C; }
 
 // Проверка - сумма углов должна быть равна 180    
-bool TTriangle::Check(std::string& Err) { 
+bool TTriangle::Check(std::string& Err) {
     bool res{ FAngle_A + FAngle_B + FAngle_C == 180 };
     Err = "";
     if (!res) { Err = GetName() + ". Ошибка создания фигуры. Причина: сумма углов не равна 180."; }

@@ -14,7 +14,7 @@ private:
     int FAngle_D;
 public:
     TQuadrilateral(int ALength_a, int ALength_b, int ALength_c, int ALength_d,
-        int AAngle_A, int AAngle_B, int AAngle_C, int AAngle_D);
+        int AAngle_A, int AAngle_B, int AAngle_C, int AAngle_D, bool Checked = true);
     int GetLength_a();
     int GetLength_b();
     int GetLength_c();

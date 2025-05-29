@@ -13,7 +13,7 @@ protected:
     int FAngle_C;
 public:
     TTriangle(int ALength_a, int ALength_b, int ALength_c,
-        int AAngle_A, int AAngle_B, int AAngle_C);
+        int AAngle_A, int AAngle_B, int AAngle_C, bool Checked=true);
 
     int GetLength_a();
     int GetLength_b();

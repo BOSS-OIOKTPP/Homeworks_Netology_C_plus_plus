@@ -4,6 +4,6 @@
 // Прямоугольный треугольник - угол C всегда равен 90;
 class TTriangleRight : public TTriangle {
 public:
-    TTriangleRight(int ALength_a, int ALength_b, int ALength_c, int AAngle_A, int AAngle_B);    
+    TTriangleRight(int ALength_a, int ALength_b, int ALength_c, int AAngle_A, int AAngle_B, bool Checked=true);
 };
 

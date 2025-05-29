@@ -4,7 +4,7 @@
 
 // Четырёхугольник
 TQuadrilateral::TQuadrilateral(int ALength_a, int ALength_b, int ALength_c, int ALength_d,
-    int AAngle_A, int AAngle_B, int AAngle_C, int AAngle_D) {
+    int AAngle_A, int AAngle_B, int AAngle_C, int AAngle_D, bool Checked) {
     FSides = 4;
     FName = "Четырёхугольник";
     FLength_a = ALength_a;
@@ -17,7 +17,7 @@ TQuadrilateral::TQuadrilateral(int ALength_a, int ALength_b, int ALength_c, int 
     FAngle_D = AAngle_D;
 
     std::string ErrText;
-    if (!Check(ErrText)) { throw bad_CreatePolygon(ErrText); }
+    if (Checked && !Check(ErrText)) { throw bad_CreatePolygon(ErrText); }
 }
 int TQuadrilateral::GetLength_a() { return FLength_a; }
 int TQuadrilateral::GetLength_b() { return FLength_b; }

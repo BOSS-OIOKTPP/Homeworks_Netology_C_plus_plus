@@ -4,5 +4,5 @@
 // Прямоугольник
 class TQuadrilateralRect : public TQuadrilateral {
 public:
-    TQuadrilateralRect(int ALength_a, int ALength_b);
+    TQuadrilateralRect(int ALength_a, int ALength_b, bool Checked = true);
 };
