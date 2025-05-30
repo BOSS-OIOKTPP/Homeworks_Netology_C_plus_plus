@@ -97,5 +97,5 @@ int main()
     }
     catch (const bad_CreatePolygon& ex) { std::cout << ex.what() << std::endl; }
     
-    return 0;
+    return EXIT_SUCCESS;
 }

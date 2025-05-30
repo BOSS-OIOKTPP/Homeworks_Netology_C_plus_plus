@@ -36,9 +36,9 @@ int main()
         }
         catch (const bad_length& ex) { 
             std::cout << ex.what() << "До свидания!" << std::endl;            
-            return 1;  
+            return EXIT_FAILURE;
         }
     } 
 
-    return 0;
+    return EXIT_SUCCESS;
 }

@@ -2,11 +2,20 @@
 #include "QuadrilateralParallelogram.h"
 
 // Параллелограмм
-TQuadrilateralParallelogram::TQuadrilateralParallelogram(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B, bool Checked) :
-    TQuadrilateral(ALength_a, ALength_b, ALength_a, ALength_b, AAngle_A, AAngle_B, AAngle_A, AAngle_B,false)
-{
+TQuadrilateralParallelogram::TQuadrilateralParallelogram(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B) {
+    // FSides = 4;  // уже инициирован в родительском классе
     FName = "Параллелограмм";  // Переопределяем название
+    FLength_a = ALength_a;
+    FLength_b = ALength_b;
+    FLength_c = ALength_a;
+    FLength_d = ALength_b;
+    FAngle_A = AAngle_A;
+    FAngle_B = AAngle_B;
+    FAngle_C = AAngle_A;
+    FAngle_D = AAngle_B;
 
-    std::string ErrText;
-    if (Checked && !Check(ErrText)) { throw bad_CreatePolygon(ErrText); }
+    // Проверка - сумма углов должна быть равна 180    
+    if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
+        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+    }
 }

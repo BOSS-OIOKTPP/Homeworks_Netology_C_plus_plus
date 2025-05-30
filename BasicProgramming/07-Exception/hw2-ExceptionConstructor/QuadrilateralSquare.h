@@ -4,5 +4,5 @@
 //  вадрат
 class TQuadrilateralSquare : public TQuadrilateral {
 public:
-    TQuadrilateralSquare(int ALength_a, bool Checked = true);
+    TQuadrilateralSquare(int ALength_a);
 };

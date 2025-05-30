@@ -3,8 +3,20 @@
 #include "Quadrilateral.h"
 
 // Четырёхугольник
+TQuadrilateral::TQuadrilateral() {
+    FSides = 4;
+    FName = "Четырёхугольник";
+    FLength_a = 0;
+    FLength_b = 0;
+    FLength_c = 0;
+    FLength_d = 0;
+    FAngle_A = 0;
+    FAngle_B = 0;
+    FAngle_C = 0;
+    FAngle_D = 0;
+}
 TQuadrilateral::TQuadrilateral(int ALength_a, int ALength_b, int ALength_c, int ALength_d,
-    int AAngle_A, int AAngle_B, int AAngle_C, int AAngle_D, bool Checked) {
+    int AAngle_A, int AAngle_B, int AAngle_C, int AAngle_D) {
     FSides = 4;
     FName = "Четырёхугольник";
     FLength_a = ALength_a;
@@ -16,9 +28,12 @@ TQuadrilateral::TQuadrilateral(int ALength_a, int ALength_b, int ALength_c, int 
     FAngle_C = AAngle_C;
     FAngle_D = AAngle_D;
 
-    std::string ErrText;
-    if (Checked && !Check(ErrText)) { throw bad_CreatePolygon(ErrText); }
+    // Проверка - сумма углов должна быть равна 180    
+    if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
+        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+    }
 }
+
 int TQuadrilateral::GetLength_a() { return FLength_a; }
 int TQuadrilateral::GetLength_b() { return FLength_b; }
 int TQuadrilateral::GetLength_c() { return FLength_c; }
@@ -28,12 +43,6 @@ int TQuadrilateral::GetAngle_B() { return FAngle_B; }
 int TQuadrilateral::GetAngle_C() { return FAngle_C; }
 int TQuadrilateral::GetAngle_D() { return FAngle_D; }
 
-bool TQuadrilateral::Check(std::string& Err) {
-    bool res{ FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360 };
-    Err = "";
-    if (!res) { Err = GetName()+". Ошибка создания фигуры. Причина: сумма углов не равна 360."; }
-    return res;
-}
 // Печать
 void TQuadrilateral::Print() {
     std::cout << GetName() + " ( " << "cтороны :" << " a = " << GetLength_a() << " b = " << GetLength_b() << " c = " << GetLength_c() << " d = " << GetLength_d() << "; "
