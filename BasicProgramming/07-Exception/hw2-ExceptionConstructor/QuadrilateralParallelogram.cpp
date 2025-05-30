@@ -1,10 +1,10 @@
 #include "bad_CreatePolygon.h"
 #include "QuadrilateralParallelogram.h"
 
-// Параллелограмм
+// РџР°СЂР°Р»Р»РµР»РѕРіСЂР°РјРј
 TQuadrilateralParallelogram::TQuadrilateralParallelogram(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B) {
-    // FSides = 4;  // уже инициирован в родительском классе
-    FName = "Параллелограмм";  // Переопределяем название
+    // FSides = 4;  // СѓР¶Рµ РёРЅРёС†РёРёСЂРѕРІР°РЅ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј РєР»Р°СЃСЃРµ
+    FName = "РџР°СЂР°Р»Р»РµР»РѕРіСЂР°РјРј";  // РџРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РЅР°Р·РІР°РЅРёРµ
     FLength_a = ALength_a;
     FLength_b = ALength_b;
     FLength_c = ALength_a;
@@ -14,8 +14,8 @@ TQuadrilateralParallelogram::TQuadrilateralParallelogram(int ALength_a, int ALen
     FAngle_C = AAngle_A;
     FAngle_D = AAngle_B;
 
-    // Проверка - сумма углов должна быть равна 180    
+    // РџСЂРѕРІРµСЂРєР° - СЃСѓРјРјР° СѓРіР»РѕРІ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° 180    
     if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+        throw bad_CreatePolygon("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„РёРіСѓСЂС‹. РџСЂРёС‡РёРЅР°: СЃСѓРјРјР° СѓРіР»РѕРІ РЅРµ СЂР°РІРЅР° 180. ( " + GetName() + " )");
     }
 }

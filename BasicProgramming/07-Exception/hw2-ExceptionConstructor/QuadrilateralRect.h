@@ -1,7 +1,7 @@
 #pragma once
 #include "Quadrilateral.h"
 
-// Прямоугольник
+// РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє
 class TQuadrilateralRect : public TQuadrilateral {
 public:
     TQuadrilateralRect(int ALength_a, int ALength_b, bool Checked = true);

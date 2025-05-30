@@ -2,7 +2,7 @@
 
 #include "TriangleIsosceles.h"
 
-// Равносторонний треугольник - все стороны равны, все углы равны 60;
+// Р Р°РІРЅРѕСЃС‚РѕСЂРѕРЅРЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє - РІСЃРµ СЃС‚РѕСЂРѕРЅС‹ СЂР°РІРЅС‹, РІСЃРµ СѓРіР»С‹ СЂР°РІРЅС‹ 60;
 class TTriangleEquilateral : public TTriangle {
 public:
     TTriangleEquilateral(int ALength_a);

@@ -3,9 +3,9 @@
 #include "Polygon.h"
 
 
-TPolygon::TPolygon() : FSides(0), FName("Фигура") {}
+TPolygon::TPolygon() : FSides(0), FName("Р¤РёРіСѓСЂР°") {}
 int TPolygon::GetSides() { return FSides; }
 std::string TPolygon::GetName() { return FName; }
 void TPolygon::Print() {
-    std::cout << GetName() + " ( " << "cтороны" << GetSides() << " ) создан" << std::endl;
+    std::cout << GetName() + " ( " << "cС‚РѕСЂРѕРЅС‹" << GetSides() << " ) СЃРѕР·РґР°РЅ" << std::endl;
 }

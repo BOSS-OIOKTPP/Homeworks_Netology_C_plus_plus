@@ -1,10 +1,10 @@
 #include "bad_CreatePolygon.h"
 #include "QuadrilateralRhomb.h"
 
-// Ромб
+// Р РѕРјР±
 TQuadrilateralRhomb::TQuadrilateralRhomb(int ALength_a, int AAngle_A, int AAngle_B, bool Checked) {
-    // FSides = 4;  // уже инициирован в родительском классе
-    FName = "Ромб";  // Переопределяем название
+    // FSides = 4;  // СѓР¶Рµ РёРЅРёС†РёРёСЂРѕРІР°РЅ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј РєР»Р°СЃСЃРµ
+    FName = "Р РѕРјР±";  // РџРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РЅР°Р·РІР°РЅРёРµ
     FLength_a = ALength_a;
     FLength_b = ALength_a;
     FLength_c = ALength_a;
@@ -14,9 +14,9 @@ TQuadrilateralRhomb::TQuadrilateralRhomb(int ALength_a, int AAngle_A, int AAngle
     FAngle_C = AAngle_A;
     FAngle_D = AAngle_B;
 
-    // Проверка - сумма углов должна быть равна 180    
+    // РџСЂРѕРІРµСЂРєР° - СЃСѓРјРјР° СѓРіР»РѕРІ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° 180    
     if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+        throw bad_CreatePolygon("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„РёРіСѓСЂС‹. РџСЂРёС‡РёРЅР°: СЃСѓРјРјР° СѓРіР»РѕРІ РЅРµ СЂР°РІРЅР° 180. ( " + GetName() + " )");
     }
 }
 

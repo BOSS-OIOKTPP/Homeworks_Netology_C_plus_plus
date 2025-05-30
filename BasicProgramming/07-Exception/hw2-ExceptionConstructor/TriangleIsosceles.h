@@ -1,7 +1,7 @@
 #pragma once
 #include "Triangle.h"
 
-// Равнобедренный треугольник - стороны a и c равны, углы A и C равны;
+// Р Р°РІРЅРѕР±РµРґСЂРµРЅРЅС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє - СЃС‚РѕСЂРѕРЅС‹ a Рё c СЂР°РІРЅС‹, СѓРіР»С‹ A Рё C СЂР°РІРЅС‹;
 class TTriangleIsosceles : public TTriangle {
 public:
 	TTriangleIsosceles(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B);

@@ -3,6 +3,6 @@
 
 bad_CreatePolygon::bad_CreatePolygon(std::string msg): std::exception(msg.c_str()) {};
 
-//const char* bad_CreatePolygon::what() const { return "Ошибка создания фигуры! "; }
+//const char* bad_CreatePolygon::what() const { return "РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„РёРіСѓСЂС‹! "; }
 
 

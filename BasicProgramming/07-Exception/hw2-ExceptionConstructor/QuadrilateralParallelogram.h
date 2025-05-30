@@ -1,7 +1,7 @@
 #pragma once
 #include "Quadrilateral.h"
 
-// Параллелограмм
+// РџР°СЂР°Р»Р»РµР»РѕРіСЂР°РјРј
 class TQuadrilateralParallelogram : public TQuadrilateral {
 public:
     TQuadrilateralParallelogram(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B);

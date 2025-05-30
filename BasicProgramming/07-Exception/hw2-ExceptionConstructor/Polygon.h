@@ -1,18 +1,18 @@
 #pragma once
 #include <string>
 
-// Базовый класс
+// Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ
 class TPolygon {
 protected:
-    int FSides;         // Количество сторон
-    std::string FName;  // Названия фигуры
+    int FSides;         // РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕСЂРѕРЅ
+    std::string FName;  // РќР°Р·РІР°РЅРёСЏ С„РёРіСѓСЂС‹
 public:
     TPolygon();
     
     int GetSides();
     std::string GetName();
 
-    // Печать
+    // РџРµС‡Р°С‚СЊ
     virtual void Print();
 };
 

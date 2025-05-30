@@ -1,10 +1,10 @@
 #include "bad_CreatePolygon.h"
 #include "TriangleIsosceles.h"
 
-// Равнобедренный треугольник - стороны a и c равны, углы A и C равны;
+// Р Р°РІРЅРѕР±РµРґСЂРµРЅРЅС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє - СЃС‚РѕСЂРѕРЅС‹ a Рё c СЂР°РІРЅС‹, СѓРіР»С‹ A Рё C СЂР°РІРЅС‹;
 TTriangleIsosceles::TTriangleIsosceles(int ALength_a, int ALength_b, int AAngle_A, int AAngle_B) {
-    // FSides = 3;  // уже инициирован в родительском классе
-    FName = "Равнобедренный треугольник";  // Переопределяем название
+    // FSides = 3;  // СѓР¶Рµ РёРЅРёС†РёРёСЂРѕРІР°РЅ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј РєР»Р°СЃСЃРµ
+    FName = "Р Р°РІРЅРѕР±РµРґСЂРµРЅРЅС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє";  // РџРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РЅР°Р·РІР°РЅРёРµ
     FLength_a = ALength_a;
     FLength_b = ALength_b;
     FLength_c = ALength_a;
@@ -12,9 +12,9 @@ TTriangleIsosceles::TTriangleIsosceles(int ALength_a, int ALength_b, int AAngle_
     FAngle_B = AAngle_B;
     FAngle_C = AAngle_A;
 
-    // Проверка - сумма углов должна быть равна 180    
+    // РџСЂРѕРІРµСЂРєР° - СЃСѓРјРјР° СѓРіР»РѕРІ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° 180    
     if (!(FAngle_A + FAngle_B + FAngle_C == 180)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. " + GetName() + ")");
+        throw bad_CreatePolygon("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„РёРіСѓСЂС‹. РџСЂРёС‡РёРЅР°: СЃСѓРјРјР° СѓРіР»РѕРІ РЅРµ СЂР°РІРЅР° 180. " + GetName() + ")");
     }
 }
 

@@ -1,10 +1,10 @@
 #include "bad_CreatePolygon.h"
 #include "QuadrilateralRect.h"
 
-// Прямоугольник
+// РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє
 TQuadrilateralRect::TQuadrilateralRect(int ALength_a, int ALength_b, bool Checked) {
-    // FSides = 4;  // уже инициирован в родительском классе
-    FName = "Прямоугольник";  // Переопределяем название
+    // FSides = 4;  // СѓР¶Рµ РёРЅРёС†РёРёСЂРѕРІР°РЅ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј РєР»Р°СЃСЃРµ
+    FName = "РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє";  // РџРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РЅР°Р·РІР°РЅРёРµ
     FLength_a = ALength_a;
     FLength_b = ALength_b;
     FLength_c = ALength_a;
@@ -14,8 +14,8 @@ TQuadrilateralRect::TQuadrilateralRect(int ALength_a, int ALength_b, bool Checke
     FAngle_C = 90;
     FAngle_D = 90;    
 
-    // Проверка - сумма углов должна быть равна 180    
+    // РџСЂРѕРІРµСЂРєР° - СЃСѓРјРјР° СѓРіР»РѕРІ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° 180    
     if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+        throw bad_CreatePolygon("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„РёРіСѓСЂС‹. РџСЂРёС‡РёРЅР°: СЃСѓРјРјР° СѓРіР»РѕРІ РЅРµ СЂР°РІРЅР° 180. ( " + GetName() + " )");
     }
 }

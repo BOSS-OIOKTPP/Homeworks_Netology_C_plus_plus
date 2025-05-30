@@ -1,10 +1,10 @@
 #include "bad_CreatePolygon.h"
 #include "TriangleRight.h"
 
-// Прямоугольный треугольник - угол C всегда равен 90;
+// РџСЂСЏРјРѕСѓРіРѕР»СЊРЅС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє - СѓРіРѕР» C РІСЃРµРіРґР° СЂР°РІРµРЅ 90;
 TTriangleRight::TTriangleRight(int ALength_a, int ALength_b, int ALength_c, int AAngle_A, int AAngle_B)  {
-    // FSides = 3;  // уже инициирован в родительском классе
-    FName = "Прямоугольный треугольник";
+    // FSides = 3;  // СѓР¶Рµ РёРЅРёС†РёРёСЂРѕРІР°РЅ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј РєР»Р°СЃСЃРµ
+    FName = "РџСЂСЏРјРѕСѓРіРѕР»СЊРЅС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє";
     FLength_a = ALength_a;
     FLength_b = ALength_b;
     FLength_c = ALength_c;
@@ -12,9 +12,9 @@ TTriangleRight::TTriangleRight(int ALength_a, int ALength_b, int ALength_c, int 
     FAngle_B = AAngle_B;
     FAngle_C = 90;
 
-    // Проверка - сумма углов должна быть равна 180    
+    // РџСЂРѕРІРµСЂРєР° - СЃСѓРјРјР° СѓРіР»РѕРІ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° 180    
     if (!(FAngle_A + FAngle_B + FAngle_C == 180)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. " + GetName() + ")");
+        throw bad_CreatePolygon("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„РёРіСѓСЂС‹. РџСЂРёС‡РёРЅР°: СЃСѓРјРјР° СѓРіР»РѕРІ РЅРµ СЂР°РІРЅР° 180. " + GetName() + ")");
     }    
 }
 

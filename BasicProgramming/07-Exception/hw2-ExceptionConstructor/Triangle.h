@@ -2,7 +2,7 @@
 #include "Polygon.h"
 #include <string>
 
-// Треугольник
+// РўСЂРµСѓРіРѕР»СЊРЅРёРє
 class TTriangle : public TPolygon {
 protected:
     int FLength_a;
@@ -21,6 +21,6 @@ public:
     int GetAngle_B();
     int GetAngle_C();
     
-    // Печать
+    // РџРµС‡Р°С‚СЊ
     void Print() override;
 };

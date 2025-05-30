@@ -1,7 +1,7 @@
 #pragma once
 #include "Quadrilateral.h"
 
-// Квадрат
+// РљРІР°РґСЂР°С‚
 class TQuadrilateralSquare : public TQuadrilateral {
 public:
     TQuadrilateralSquare(int ALength_a);

@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include <locale>
+#include <windows.h>
 #include <string>
 #include "bad_CreatePolygon.h"
 #include "Triangle.h"
@@ -15,7 +15,9 @@
 
 int main()
 {
-    setlocale(LC_ALL, "russian");
+    // Устанавливаем кодировку консоли в UTF-8
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
 
     // Треугольник:
     // Стороны: a = 10 b = 20 c = 30

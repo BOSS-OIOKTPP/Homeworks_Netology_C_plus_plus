@@ -1,7 +1,7 @@
 #pragma once
 #include "Polygon.h"
 
-// Четырёхугольник
+// Р§РµС‚С‹СЂС‘С…СѓРіРѕР»СЊРЅРёРє
 class TQuadrilateral : public TPolygon {
 protected:
     int FLength_a;
@@ -24,7 +24,7 @@ public:
     int GetAngle_B();
     int GetAngle_C();
     int GetAngle_D();
-    // Печать
+    // РџРµС‡Р°С‚СЊ
     void Print() override;
 };
 
