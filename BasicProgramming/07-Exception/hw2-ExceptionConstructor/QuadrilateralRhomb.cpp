@@ -2,7 +2,7 @@
 #include "QuadrilateralRhomb.h"
 
 // Ромб
-TQuadrilateralRhomb::TQuadrilateralRhomb(int ALength_a, int AAngle_A, int AAngle_B, bool Checked) {
+TQuadrilateralRhomb::TQuadrilateralRhomb(int ALength_a, int AAngle_A, int AAngle_B) {
     // FSides = 4;  // уже инициирован в родительском классе
     FName = "Ромб";  // Переопределяем название
     FLength_a = ALength_a;
@@ -14,9 +14,9 @@ TQuadrilateralRhomb::TQuadrilateralRhomb(int ALength_a, int AAngle_A, int AAngle
     FAngle_C = AAngle_A;
     FAngle_D = AAngle_B;
 
-    // Проверка - сумма углов должна быть равна 180    
+    // Проверка - сумма углов должна быть равна 360    
     if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 360. ( " + GetName() + " )");
     }
 }
 

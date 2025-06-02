@@ -14,8 +14,8 @@ TQuadrilateralRect::TQuadrilateralRect(int ALength_a, int ALength_b, bool Checke
     FAngle_C = 90;
     FAngle_D = 90;    
 
-    // Проверка - сумма углов должна быть равна 180    
+    // Проверка - сумма углов должна быть равна 360    
     if (!(FAngle_A + FAngle_B + FAngle_C + FAngle_D == 360)) {
-        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 180. ( " + GetName() + " )");
+        throw bad_CreatePolygon("Ошибка создания фигуры. Причина: сумма углов не равна 360. ( " + GetName() + " )");
     }
 }
