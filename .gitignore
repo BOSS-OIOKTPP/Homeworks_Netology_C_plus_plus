@@ -6,6 +6,7 @@
 ## Папки сборки ##
 [Bb]in/
 [Oo]bj/
+out/
 [Dd]ebug/
 [Rr]elease/
 x64/

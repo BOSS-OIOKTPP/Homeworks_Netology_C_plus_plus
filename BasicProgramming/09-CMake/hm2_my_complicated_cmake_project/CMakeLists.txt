@@ -10,7 +10,7 @@ project(my_complicated_cmake_project)
 include_directories(include)
 
 # Папка для выходных файлов
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../../exe)
 
 # Добавляем исполняемый файл
 add_executable(my_complicated_cmake_project
