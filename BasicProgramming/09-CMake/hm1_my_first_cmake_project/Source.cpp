@@ -8,13 +8,13 @@ int main(int argc, char** argv)
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	std::string Name;
+	std::string name;
 
 	std::cout << "Введите имя : ";
-	std::cin >> Name;
+	std::cin >> name;
 
 
-	std::cout << "Здравствуйте, " << Name << "!" << std::endl;
+	std::cout << "Здравствуйте, " << name << "!" << std::endl;
 
 	return EXIT_SUCCESS;
 }
