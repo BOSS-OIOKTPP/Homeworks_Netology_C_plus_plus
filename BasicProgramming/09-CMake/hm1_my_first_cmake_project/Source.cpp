@@ -1,20 +1,20 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <windows.h>
 
 int main(int argc, char** argv)
 {
-	// Устанавливаем кодировку консоли в UTF-8
-	 // Установка кодировки консоли Windows
+	// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРґРёСЂРѕРІРєСѓ РєРѕРЅСЃРѕР»Рё РІ UTF-8
+	 // РЈСЃС‚Р°РЅРѕРІРєР° РєРѕРґРёСЂРѕРІРєРё РєРѕРЅСЃРѕР»Рё Windows
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
 	std::string name;
 
-	std::cout << "Введите имя : ";
+	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ : ";
 	std::cin >> name;
 
 
-	std::cout << "Здравствуйте, " << name << "!" << std::endl;
+	std::cout << "Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ, " << name << "!" << std::endl;
 
 	return EXIT_SUCCESS;
 }
