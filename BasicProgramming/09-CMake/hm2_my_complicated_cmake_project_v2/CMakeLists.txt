@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.22)
 project(my_complicated_cmake_project LANGUAGES CXX)
 
-# Устанавливаем стандарт C++
+# РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃС‚Р°РЅРґР°СЂС‚ C++
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Список исходных файлов
+# РЎРїРёСЃРѕРє РёСЃС…РѕРґРЅС‹С… С„Р°Р№Р»РѕРІ
 set(SOURCES
     src/hw3-ClassHierarchy.cpp
     src/Polygon.cpp
@@ -20,7 +20,7 @@ set(SOURCES
     src/TriangleRight.cpp
 )
 
-# Список заголовочных файлов
+# РЎРїРёСЃРѕРє Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹С… С„Р°Р№Р»РѕРІ
 set(HEADERS
     include/Polygon.h
     include/Quadrilateral.h
@@ -34,8 +34,8 @@ set(HEADERS
     include/TriangleRight.h
 )
 
-# Создаем исполняемый файл
+# РЎРѕР·РґР°РµРј РёСЃРїРѕР»РЅСЏРµРјС‹Р№ С„Р°Р№Р»
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-# Указываем путь к заголовочным файлам (для компилятора)
+# РЈРєР°Р·С‹РІР°РµРј РїСѓС‚СЊ Рє Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹Рј С„Р°Р№Р»Р°Рј (РґР»СЏ РєРѕРјРїРёР»СЏС‚РѕСЂР°)
 target_include_directories(${PROJECT_NAME} PRIVATE include)

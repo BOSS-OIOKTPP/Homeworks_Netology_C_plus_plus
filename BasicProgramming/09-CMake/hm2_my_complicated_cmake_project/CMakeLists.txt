@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.22.0)
 
-# Устанавливаем стандарт C++
+# РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃС‚Р°РЅРґР°СЂС‚ C++
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(my_complicated_cmake_project)
 
-# Подключаем заголовочные файлы
+# РџРѕРґРєР»СЋС‡Р°РµРј Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹Рµ С„Р°Р№Р»С‹
 include_directories(include)
 
-# Добавляем исполняемый файл
+# Р”РѕР±Р°РІР»СЏРµРј РёСЃРїРѕР»РЅСЏРµРјС‹Р№ С„Р°Р№Р»
 add_executable(my_complicated_cmake_project
     src/hw3-ClassHierarchy.cpp
     src/Polygon.cpp
