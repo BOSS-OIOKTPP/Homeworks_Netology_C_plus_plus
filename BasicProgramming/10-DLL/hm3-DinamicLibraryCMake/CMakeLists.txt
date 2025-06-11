@@ -1,41 +1,46 @@
 cmake_minimum_required(VERSION 3.22)
-project(my_complicated_cmake_project LANGUAGES CXX)
+project(LeaverProject LANGUAGES CXX)
 
 # Устанавливаем стандарт C++
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+##  1
 # Список исходных файлов
-set(SOURCES
-    src/hw3-ClassHierarchy.cpp
-    src/Polygon.cpp
-    src/Quadrilateral.cpp
-    src/QuadrilateralParallelogram.cpp
-    src/QuadrilateralRect.cpp
-    src/QuadrilateralRhomb.cpp
-    src/QuadrilateralSquare.cpp
-    src/Triangle.cpp
-    src/TriangleEquilateral.cpp
-    src/TriangleIsosceles.cpp
-    src/TriangleRight.cpp
+set(DLL_SOURCES 
+	${CMAKE_CURRENT_SOURCE_DIR}/LeaverDLL/Leaver.cpp
+) 
+set(EXE_SOURCES 
+	${CMAKE_CURRENT_SOURCE_DIR}/LeaverEXE/LeaverEXE.cpp
 )
-
-# Список заголовочных файлов
 set(HEADERS
-    include/Polygon.h
-    include/Quadrilateral.h
-    include/QuadrilateralParallelogram.h
-    include/QuadrilateralRect.h
-    include/QuadrilateralRhomb.h
-    include/QuadrilateralSquare.h
-    include/Triangle.h
-    include/TriangleEquilateral.h
-    include/TriangleIsosceles.h
-    include/TriangleRight.h
-)
+	${CMAKE_CURRENT_SOURCE_DIR}/LeaverDLL/Leaver.h
+) 
 
-# Создаем исполняемый файл
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
+##  2
+# Создаем DLL
+add_library(LeaverDLL SHARED ${DLL_SOURCES} ${HEADERS})
 
 # Указываем путь к заголовочным файлам (для компилятора)
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+#target_include_directories(LeaverDLL PRIVATE 
+#	${CMAKE_CURRENT_SOURCE_DIR}/LeaverDLL)
+
+# Добавляем определение для экспорта
+target_compile_definitions(LeaverDLL PRIVATE "LEAVERDLL_EXPORTS")
+
+
+##  3
+# Создаем исполняемый файл
+add_executable(LeaverEXE ${EXE_SOURCES})
+
+# Указываем путь к заголовочным файлам (для компилятора)
+target_include_directories(LeaverEXE PRIVATE 
+	${CMAKE_CURRENT_SOURCE_DIR}/LeaverDLL)
+
+# Связываем EXE с DLL
+target_link_libraries(LeaverEXE PRIVATE LeaverDLL)
+
+# Добавляем определения для импорта
+target_compile_definitions(LeaverEXE PRIVATE "LEAVERDLL_IMPORTS")
