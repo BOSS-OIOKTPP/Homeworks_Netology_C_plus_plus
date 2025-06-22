@@ -2,9 +2,11 @@
 
 // Метла
 Broom::Broom() {
-	tType = TransportType::air;		// Воздушный тип транспорта
-	tVid = TransportVid::broom;		// Метла
-	tV = 20;						// Скорость транспортного средства
+	tType = TransportType::air;			// Воздушный тип транспорта
+	tVid = TransportVid::broom;			// Метла
+	tRaces.insert(RaceType::air);		// Разрешаем участие в воздушной гонке
+	tRaces.insert(RaceType::combined);	// Разрешаем участие в комбинированной гонке
+	tV = 20;							// Скорость транспортного средства
 }
 
 // Процент сокращения расстояния

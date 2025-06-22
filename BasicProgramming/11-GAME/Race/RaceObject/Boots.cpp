@@ -1,12 +1,15 @@
 #include "Boots.h"
+#include "RaceParams.h"
 
 Boots::Boots() {
-	tType = TransportType::ground;	// Наземный тип транспорта
-	tVid = TransportVid::boots;		// Ботинки-вездеходы
-	tV = 6;							// Скорость транспортного средства
-	DrivingTime = 60;				// Время движения до отдыха
-	RestTime1 = 10;					// Длительность отдыха первый раз
-	RestTime2 = 5;					// Длительность отдыха все последующие разы
+	tType = TransportType::ground;		// Наземный тип транспорта
+	tVid = TransportVid::boots;			// Ботинки-вездеходы
+	tRaces.insert(RaceType::ground);	// Разрешаем участие в наземной гонке
+	tRaces.insert(RaceType::combined);	// Разрешаем участие в комбинированной гонке
+	tV = 6;								// Скорость транспортного средства
+	DrivingTime = 60;					// Время движения до отдыха
+	RestTime1 = 10;						// Длительность отдыха первый раз
+	RestTime2 = 5;						// Длительность отдыха все последующие разы
 }
 
 // Рассчитываем время прохождения дистанции ботинками

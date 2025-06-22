@@ -4,6 +4,8 @@
 Centaur::Centaur() {
 	tType = TransportType::ground;		// Наземный тип транспорта
 	tVid = TransportVid::centaur;		// Кентавр
+	tRaces.insert(RaceType::ground);	// Разрешаем участие в наземной гонке
+	tRaces.insert(RaceType::combined);	// Разрешаем участие в комбинированной гонке
 	tV = 15;							// Скорость транспортного средства
 	DrivingTime = 8;					// Время движения до отдыха
 	RestTime = 2;						// Длительность отдыха	

@@ -4,6 +4,8 @@
 FlyingCarpet::FlyingCarpet() {
 	tType = TransportType::air;				// Воздушный тип транспорта
 	tVid = TransportVid::flying_carpet;		// Ковер-самолет
+	tRaces.insert(RaceType::air);			// Разрешаем участие в воздушной гонке
+	tRaces.insert(RaceType::combined);		// Разрешаем участие в комбинированной гонке
 	tV = 10;								// Скорость транспортного средства
 }
 

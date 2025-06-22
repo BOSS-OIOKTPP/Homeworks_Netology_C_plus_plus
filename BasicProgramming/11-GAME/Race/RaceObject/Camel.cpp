@@ -1,12 +1,14 @@
 #include "Camel.h"
 
 Camel::Camel() {
-	tType = TransportType::ground;	// Наземный тип транспорта
-	tVid = TransportVid::camel;		// Верблюд
-	tV = 10;						// Скорость транспортного средства
-	DrivingTime = 30;				// Время движения до отдыха
-	RestTime1 = 5;					// Длительность отдыха первый раз
-	RestTime2 = 8;					// Длительность отдыха все последующие разы
+	tType = TransportType::ground;		// Наземный тип транспорта
+	tVid = TransportVid::camel;			// Верблюд
+	tRaces.insert(RaceType::ground);	// Разрешаем участие в наземной гонке
+	tRaces.insert(RaceType::combined);	// Разрешаем участие в комбинированной гонке
+	tV = 10;							// Скорость транспортного средства
+	DrivingTime = 30;					// Время движения до отдыха
+	RestTime1 = 5;						// Длительность отдыха первый раз
+	RestTime2 = 8;						// Длительность отдыха все последующие разы
 }
 
 // Рассчитываем время прохождения дистанции 

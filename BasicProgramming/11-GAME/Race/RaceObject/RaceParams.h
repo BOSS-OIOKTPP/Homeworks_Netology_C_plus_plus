@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "Transport.h"
 
 #ifdef RACEOBJECT_EXPORTS
@@ -36,27 +37,34 @@ enum class TransportVid {
 };
 RACEOBJECT_API std::string GetTransportTypeName(TransportVid V);
 
-struct TransportSelect {
-    int boots = 0;          // Ботинки-вездеходы
-    int broom = 0;          // Метла
-    int camel = 0;          // Верблюд
-    int centaur = 0;        // Кентавр
-    int eagle = 0;          // Орел
-    int speed_camel = 0;    // Верблюд-скороход
-    int flying_carpet = 0;  // Ковер-самолет
-
-    int GetCountSelect() { return boots + broom + camel + centaur + eagle + speed_camel + flying_carpet; }
-};
+//struct TransportSelect {
+//    int boots = 0;          // Ботинки-вездеходы
+//    int broom = 0;          // Метла
+//    int camel = 0;          // Верблюд
+//    int centaur = 0;        // Кентавр
+//    int eagle = 0;          // Орел
+//    int speed_camel = 0;    // Верблюд-скороход
+//    int flying_carpet = 0;  // Ковер-самолет
+//
+//    int GetCountSelect() { return boots + broom + camel + centaur + eagle + speed_camel + flying_carpet; }
+//};
 
 // Параметры гонки
 class Game {
 private:
-    RaceType race;                  // Выбранный тип гонки
-    TransportSelect transport;      // Выбранные транспортные средства
-    int distance;                   // Дистанция
+    RaceType Race;                      // Выбранный тип гонки
+    std::vector<Transport*> Transports; // Массив указателей на транспортные средства участвующие в гонке        
+    int RaceDistance;                   // Дистанция
 public:
-    // Проверка транспорта на соответствие гонке и проверка на 
-    int CheckTransport(TransportVid TV, std::string& errName);
+    ~Game();
+
+    // Очищаем список транспортных средств
+    void Clear();
+    // Добавляем транспорт для гонок нужного типа
+    void AddTransport(Transport* transport);
+
+    // Проверка транспорта на соответствие гонке
+    int CheckTransportRace(Transport& Transport, std::string& errName);
 
 	//RACEOBJECT_API std::string leave(std::string name);
 };

@@ -3,6 +3,8 @@
 SpeedCamel::SpeedCamel() {
 	tType = TransportType::ground;		// Наземный тип транспорта
 	tVid = TransportVid::speed_camel;	// Верблюд
+	tRaces.insert(RaceType::ground);	// Разрешаем участие в наземной гонке
+	tRaces.insert(RaceType::combined);	// Разрешаем участие в комбинированной гонке
 	tV = 40;							// Скорость транспортного средства
 	DrivingTime = 10;					// Время движения до отдыха
 	RestTime1 = 5;						// Длительность отдыха первый раз
