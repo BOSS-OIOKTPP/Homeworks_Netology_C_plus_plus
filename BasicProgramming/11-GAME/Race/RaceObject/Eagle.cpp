@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Eagle.h"
 
 // Орел
@@ -12,6 +13,6 @@ Eagle::Eagle() {
 
 // Рассчитываем время прохождения дистанции 
 void Eagle::Calc(int distance) {
-	tDistance = distance * (100 - Procent)/100;	// Запоминаем дистанцию
-	tTime = tDistance / tV;						// Время прохождения дистанции	
+	tDistance = distance * (100 - Procent)/100;		// Запоминаем дистанцию	
+	tTime = std::round(tDistance / tV * 10) / 10;	// Время прохождения дистанции. Время округляем до 1 знака после запятой	
 }

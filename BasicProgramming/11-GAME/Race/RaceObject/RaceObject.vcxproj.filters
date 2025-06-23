@@ -30,9 +30,6 @@
     <ClCompile Include="Camel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Сentaur.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="SpeedCamel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="FlyingCarpet.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Centaur.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,9 +59,6 @@
     <ClInclude Include="Camel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Сentaur.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="SpeedCamel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -69,6 +66,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="FlyingCarpet.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Centaur.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

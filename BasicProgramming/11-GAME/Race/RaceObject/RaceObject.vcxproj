@@ -134,23 +134,23 @@
     <ClCompile Include="Boots.cpp" />
     <ClCompile Include="Broom.cpp" />
     <ClCompile Include="Camel.cpp" />
+    <ClCompile Include="Centaur.cpp" />
     <ClCompile Include="Eagle.cpp" />
     <ClCompile Include="FlyingCarpet.cpp" />
     <ClCompile Include="RaceParams.cpp" />
     <ClCompile Include="SpeedCamel.cpp" />
     <ClCompile Include="Transport.cpp" />
-    <ClCompile Include="Сentaur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boots.h" />
     <ClInclude Include="Broom.h" />
     <ClInclude Include="Camel.h" />
+    <ClInclude Include="Centaur.h" />
     <ClInclude Include="Eagle.h" />
     <ClInclude Include="FlyingCarpet.h" />
     <ClInclude Include="RaceParams.h" />
     <ClInclude Include="SpeedCamel.h" />
     <ClInclude Include="Transport.h" />
-    <ClInclude Include="Сentaur.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

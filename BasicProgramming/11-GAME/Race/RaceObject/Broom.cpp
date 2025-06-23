@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Broom.h"
 
 // Метла
@@ -17,5 +18,5 @@ int Broom::Procent(int distance) { return distance / 1000; };
 // Рассчитываем время прохождения дистанции 
 void Broom::Calc(int distance) {
 	tDistance = distance*(100-Procent(distance))/100;	// Запоминаем дистанцию
-	tTime = tDistance / tV;								// Время прохождения дистанции	
+	tTime = std::round(tDistance / tV * 10) / 10;		// Время прохождения дистанции. Время округляем до 1 знака после запятой	
 }

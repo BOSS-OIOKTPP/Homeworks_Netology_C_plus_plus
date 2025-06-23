@@ -1,3 +1,4 @@
+#include <cmath>
 #include "FlyingCarpet.h"
 
 // Ковер-самолет
@@ -31,5 +32,5 @@ int FlyingCarpet::Procent(int distance) {
 // Рассчитываем время прохождения дистанции 
 void FlyingCarpet::Calc(int distance) {
 	tDistance = distance * (100 - Procent(distance)) / 100;	// Запоминаем дистанцию
-	tTime = tDistance / tV;									// Время прохождения дистанции	
+	tTime = std::round(tDistance / tV * 10) / 10;			// Время прохождения дистанции без отдыха. Время округляем до 1 знака после запятой
 }

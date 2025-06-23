@@ -5,8 +5,8 @@
 class Centaur : public Transport
 {
 private:
-	int DrivingTime;	// Время движения до отдыха
-	int RestTime; 		// Длительность отдыха	
+	double DrivingTime;	// Время движения до отдыха
+	double RestTime; 		// Длительность отдыха	
 public:
 	Centaur();
 
