@@ -18,6 +18,7 @@ int main()
     int intTransport;
     int intRun;
     int intReplay;
+    std::string strErr;
 
     while (true) {
         // Инициируем объект
@@ -28,6 +29,7 @@ int main()
         intTransport = 0;
         intRun = 0;
         intReplay = 0;
+        strErr = "";
 
         // Меню
         // ***   Выбор гонки   ***
@@ -77,37 +79,43 @@ int main()
             game.PrintState();
             // Выводим список доступных для регистрации транспортных средств
             std::cout << "1. " << GetTransportVidName(TransportVid::boots) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::boots) == false) ? "  +" : "") << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::boots, strErr) == false) ? "  +" : "") << std::endl;
             std::cout << "2. " << GetTransportVidName(TransportVid::broom) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::broom) == false) ? "  +" : "") << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::broom, strErr) == false) ? "  +" : "") << std::endl;
             std::cout << "3. " << GetTransportVidName(TransportVid::camel) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::camel) == false) ? "  +" : "") << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::camel, strErr) == false) ? "  +" : "") << std::endl;
             std::cout << "4. " << GetTransportVidName(TransportVid::centaur) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::centaur) == false) ? "  +" : "") << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::centaur, strErr) == false) ? "  +" : "") << std::endl;
             std::cout << "5. " << GetTransportVidName(TransportVid::eagle) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::eagle) == false) ? "  +" : "") << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::eagle, strErr) == false) ? "  +" : "") << std::endl;
             std::cout << "6. " << GetTransportVidName(TransportVid::speed_camel) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::speed_camel) == false) ? "  +" : "") << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::speed_camel, strErr) == false) ? "  +" : "") << std::endl;
             std::cout << "7. " << GetTransportVidName(TransportVid::flying_carpet) + 
-                                ((game.IsTransportValidForRegistration(TransportVid::flying_carpet) == false) ? "  +" : "") << std::endl;
-            std::cout << "0. Закончить регистрацию" << std::endl;
-            std::cout << "Должно быть зарегистрировано хотябы 2 транспортных средства" << std::endl;
-            std::cout << "Выберите транспорт или 0 для окончания процесса регистрации: " << std::endl;
+                                ((game.IsTransportValidForRegistration(TransportVid::flying_carpet, strErr) == false) ? "  +" : "") << std::endl;
+            std::cout << "8. Закончить регистрацию" << std::endl;
+            if (strErr!="")
+                std::cout << strErr << std::endl;
+            std::cout << "Выберите транспорт или 0 для окончания процесса регистрации: ";
 
             std::cin >> intTransport;
             std::cin.clear(); // Сбрасываем флаги ошибок, например, если ввели букву
             std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // Очищаем буфер до символа новой строки
 
             // Если количество зарегистрированных ТС меньше 2, то возвращаемся в меню
-            if (intTransport == 0 && game.GetTransportCount()>=2) {
+            if (intTransport == 8 && game.GetTransportCount()>=2) {
+                std::cout << "Должно быть зарегистрировано хотябы 2 транспортных средства" << std::endl;
                 break;
             } 
             // Регистрируем транспортное средство
             else if (intTransport >= 1 && intTransport <= 7) {
-                // Если не зарегистрировано, то регистрируем
-                if ( game.IsTransportValidForRegistration(static_cast<TransportVid>(intTransport)) ) {
-                    game.AddTransport(game.CreateTransport(static_cast<TransportVid>(intTransport)));
-                }
+                Transport* T = game.CreateTransport(static_cast<TransportVid>(intTransport));
+                // Проверяем, есть ли ошибки:
+                // 1) соответствует типу гонки; 2) не зарегистрировано. 
+                // true - есть ошибки.
+                bool E = !game.IsTransportValidForRaceType(T, strErr) || !game.IsTransportValidForRegistration(T, strErr);
+                if (!E) {
+                    game.AddTransport(T);
+                }                
             }
         }
         // ***   Начать гонку   ***
@@ -120,7 +128,7 @@ int main()
             std::cout << "1. Начать гонку" << std::endl;
             std::cout << "2. Повторить ввод параметров" << std::endl;
             std::cout << "3. Выйти" << std::endl;
-            std::cout << "Выберите действие: " << std::endl;
+            std::cout << "Выберите действие: ";
 
             std::cin >> intRun;
             std::cin.clear(); // Сбрасываем флаги ошибок, например, если ввели букву
@@ -150,9 +158,11 @@ int main()
             }
 
             // Выводим меню
+            std::cout << std::endl;
+            std::cout << std::endl;
             std::cout << "1. Провести еще одну гонку" << std::endl;            
             std::cout << "2. Выйти" << std::endl;
-            std::cout << "Выберите действие: " << std::endl;
+            std::cout << "Выберите действие: ";
 
             std::cin >> intReplay;
             std::cin.clear(); // Сбрасываем флаги ошибок, например, если ввели букву

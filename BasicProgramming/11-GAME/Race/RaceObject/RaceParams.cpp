@@ -75,8 +75,9 @@ int Game::GetRaceDistance() {
 
 // Проверка транспорта на соответствие типу гонке
 // true - транспорт соответствует выбранной гонке
-bool Game::IsTransportValidForRaceType(Transport& T, std::string& E) {
-    if (!T.canParticipate(Race)) {
+bool Game::IsTransportValidForRaceType(Transport* T, std::string& E) {
+    E = "";
+    if (!T->canParticipate(Race)) {
         E = "Попытка зарегистрировать неправильный тип транспортного средства!";
         return false;
     }
@@ -85,19 +86,23 @@ bool Game::IsTransportValidForRaceType(Transport& T, std::string& E) {
 
 // Проверка транспорта на регистрацию, зарегистрировать транспорт можно только 1 раз
 // true - транспорт еще не зарегистрирован на гонку
-bool Game::IsTransportValidForRegistration(Transport& T, std::string& E) {
+bool Game::IsTransportValidForRegistration(Transport* T, std::string& E) {
+    E = "";
     for (Transport* F : Transports) {
-        if (F->Vid() == T.Vid()) {
-            E = GetTransportVidName(T.Vid()) + " уже зарегистрирован!";
+        if (F->Vid() == T->Vid()) {
+            E = GetTransportVidName(T->Vid()) + " уже зарегистрирован!";
             return false;
         }
     }
     return true;
 };
 
-bool Game::IsTransportValidForRegistration(TransportVid TV) {
+bool Game::IsTransportValidForRegistration(TransportVid TV, std::string& E) {
+    E = "";
     for (Transport* F : Transports) {
-        if (F->Vid() == TV) { return false; }
+        if (F->Vid() == TV) { 
+            E = GetTransportVidName(TV) + " уже зарегистрирован!";
+            return false; }
     }
     return true;
 };
@@ -125,7 +130,7 @@ void Game::PrintState() {
 // Печать результатов игры
 void Game::PrintResult() {
     std::cout << "Результаты гонки:" << std::endl;
-    for (size_t i = 0; i < Transports.size() - 1; i++) {
+    for (size_t i = 0; i < Transports.size(); i++) {
         std::cout << i+1 << ".  " << GetTransportVidName(Transports[i]->Vid()) << ".  Время: " << Transports[i]->Time() << std::endl;
     }
 };

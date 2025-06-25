@@ -35,11 +35,11 @@ public:
 
     // Проверка транспорта на соответствие гонке
     // true - транспорт соответствует выбранной гонке
-    bool IsTransportValidForRaceType(Transport& T, std::string& E);
+    bool IsTransportValidForRaceType(Transport* T, std::string& E);
     // Проверка транспорта на регистрацию, зарегистрировать транспорт можно только 1 раз
     // true - транспорт еще не зарегистрирован на гонку
-    bool IsTransportValidForRegistration(Transport& T, std::string& E);    
-    bool IsTransportValidForRegistration(TransportVid TV);
+    bool IsTransportValidForRegistration(Transport* T, std::string& E);    
+    bool IsTransportValidForRegistration(TransportVid TV, std::string& E);
 
     
     // Печать состояния игры
