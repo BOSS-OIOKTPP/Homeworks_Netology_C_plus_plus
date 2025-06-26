@@ -1,0 +1,54 @@
+cmake_minimum_required(VERSION 3.22)
+project(Race LANGUAGES CXX)
+
+# Устанавливаем стандарт C++
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+##  1
+# Список исходных файлов
+set(SOURCES
+    ../../Race/Race/Race.cpp  
+    ../../Race/RaceObject/Boots.cpp
+    ../../Race/RaceObject/Broom.cpp
+    ../../Race/RaceObject/Camel.cpp
+    ../../Race/RaceObject/Centaur.cpp
+    ../../Race/RaceObject/Eagle.cpp
+    ../../Race/RaceObject/FlyingCarpet.cpp
+    ../../Race/RaceObject/SpeedCamel.cpp
+    ../../Race/RaceObject/Transport.cpp
+    ../../Race/RaceObject/RaceParams.cpp
+)
+
+set(HEADERS
+    ../../Race/RaceObject/Boots.h
+    ../../Race/RaceObject/Broom.h
+    ../../Race/RaceObject/Camel.h
+    ../../Race/RaceObject/Centaur.h
+    ../../Race/RaceObject/Eagle.h
+    ../../Race/RaceObject/FlyingCarpet.h
+    ../../Race/RaceObject/SpeedCamel.h
+    ../../Race/RaceObject/Transport.h
+    ../../Race/RaceObject/RaceParams.h
+)
+
+set(OUTPUT_DIR ../bin/)
+
+##  2
+# Создаем исполняемый файл
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
+# Установка выходной директории (если нужно)
+set_target_properties(${PROJECT_NAME} PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR} 
+)
+
+# Указываем путь к заголовочным файлам (для компилятора)
+target_include_directories(${PROJECT_NAME} PRIVATE ../../Race/RaceObject/)
+
+# Связываем EXE с DLL
+#target_link_libraries(PolygonEXE PRIVATE PolygonDLL)
+
+# Добавляем определения для импорта
+target_compile_definitions(${PROJECT_NAME} PRIVATE "RACEOBJECT_IMPORTS")
+
