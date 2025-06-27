@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
 #include <string>
 #include <windows.h>
@@ -203,7 +203,9 @@ int main()
         if (intReplay == 2) break;      // Выходим из игры        
     }
 
+    std::cout << std::endl;
     std::cout << "Игра завершена! Нажмите любую клавишу." << std::endl;
+    std::cout << std::endl;
 
     system("pause");
 
