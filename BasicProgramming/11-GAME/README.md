@@ -77,55 +77,55 @@
 
 ### 3. Пример пошаговой работы программы
 
-![выбор типа гонки наземная](./images/01.jpg)
+![выбор типа гонки наземная](https://github.com/netology-code/cppm-diplom/tree/main/images/01.jpg)
 
-![ввод расстояния](./images/02.jpg)
+![ввод расстояния](https://github.com/netology-code/cppm-diplom/tree/main/images/02.jpg)
 
-![выбор действия 1 регистрация](./images/03.jpg)
+![выбор действия 1 регистрация](https://github.com/netology-code/cppm-diplom/tree/main/images/03.jpg)
 
-![регистрация 1 верблюд](./images/04.jpg)
+![регистрация 1 верблюд](https://github.com/netology-code/cppm-diplom/tree/main/images/04.jpg)
 
-![регистрация 1 кентавр](./images/05.jpg)
+![регистрация 1 кентавр](https://github.com/netology-code/cppm-diplom/tree/main/images/05.jpg)
 
-![регистрация 1 выход](./images/06.jpg)
+![регистрация 1 выход](https://github.com/netology-code/cppm-diplom/tree/main/images/06.jpg)
 
-![выбор действия 2 регистрация](./images/07.jpg)
+![выбор действия 2 регистрация](https://github.com/netology-code/cppm-diplom/tree/main/images/07.jpg)
 
-![регистрация 2 верблюд](./images/08.jpg)
+![регистрация 2 верблюд](https://github.com/netology-code/cppm-diplom/tree/main/images/08.jpg)
 
-![регистрация 2 метла](./images/09.jpg)
+![регистрация 2 метла](https://github.com/netology-code/cppm-diplom/tree/main/images/09.jpg)
 
-![регистрация 2 ботинки-скороходы](./images/10.jpg)
+![регистрация 2 ботинки-скороходы](https://github.com/netology-code/cppm-diplom/tree/main/images/10.jpg)
 
-![регистрация 2 выход](./images/11.jpg)
+![регистрация 2 выход](https://github.com/netology-code/cppm-diplom/tree/main/images/11.jpg)
 
-![выбор действия старт](./images/12.jpg)
+![выбор действия старт](https://github.com/netology-code/cppm-diplom/tree/main/images/12.jpg)
 
-![результаты и выбор действия ещё раз](./images/13_new.jpeg)
+![результаты и выбор действия ещё раз](https://github.com/netology-code/cppm-diplom/tree/main/images/13_new.jpeg)
 
-![выбор типа гонки воздушная](./images/14.jpg)
+![выбор типа гонки воздушная](https://github.com/netology-code/cppm-diplom/tree/main/images/14.jpg)
 
-![ввод расстояния](./images/15.jpg)
+![ввод расстояния](https://github.com/netology-code/cppm-diplom/tree/main/images/15.jpg)
 
-![выбор действия 1 регистрация](./images/16.jpg)
+![выбор действия 1 регистрация](https://github.com/netology-code/cppm-diplom/tree/main/images/16.jpg)
 
-![регистрация 1 верблюд-быстроход](./images/17.jpg)
+![регистрация 1 верблюд-быстроход](https://github.com/netology-code/cppm-diplom/tree/main/images/17.jpg)
 
-![регистрация 1 выход](./images/18.jpg)
+![регистрация 1 выход](https://github.com/netology-code/cppm-diplom/tree/main/images/18.jpg)
 
-![выбор действия 2 регистрация](./images/19.jpg)
+![выбор действия 2 регистрация](https://github.com/netology-code/cppm-diplom/tree/main/images/19.jpg)
 
-![регистрация 2 метла](./images/20.jpg)
+![регистрация 2 метла](https://github.com/netology-code/cppm-diplom/tree/main/images/20.jpg)
 
-![регистрация 2 орёл](./images/21.jpg)
+![регистрация 2 орёл](https://github.com/netology-code/cppm-diplom/tree/main/images/21.jpg)
 
-![регистрация 2 ковёр-самолёт](./images/22.jpg)
+![регистрация 2 ковёр-самолёт](https://github.com/netology-code/cppm-diplom/tree/main/images/22.jpg)
 
-![регистрация 2 выход](./images/23.jpg)
+![регистрация 2 выход](https://github.com/netology-code/cppm-diplom/tree/main/images/23.jpg)
 
-![выбор действия старт](./images/24.jpg)
+![выбор действия старт](https://github.com/netology-code/cppm-diplom/tree/main/images/24.jpg)
 
-![результаты и выбор действия выход](./images/25.jpg)
+![результаты и выбор действия выход](https://github.com/netology-code/cppm-diplom/tree/main/images/25.jpg)
 
 ### Задание*
 Вы можете выполнить курсовую работу на CMake.
