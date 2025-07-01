@@ -1,36 +1,42 @@
-#include "Transport.h"
+﻿#include "Transport.h"
 
 std::string GetRaceTypeName(RaceType R) {
+    std::string S;
     switch (R)
     {
-    case RaceType::ground:    return "Гонка для наземного транспорта";
-    case RaceType::air:       return "Гонка для воздушного транспорта";
-    case RaceType::combined:  return "Гонка для наземного и воздушного транспорта";
-    default:                  return "нет данных";
+    case RaceType::ground:    S = "Гонка для наземного транспорта"; break;
+    case RaceType::air:       S = "Гонка для воздушного транспорта"; break;
+    case RaceType::combined:  S = "Гонка для наземного и воздушного транспорта"; break;
+    default:                  S = "нет данных"; 
     }
+    return S;
 };
 
 std::string GetTransportTypeName(TransportType TT) {
+    std::string S;
     switch (TT)
     {
-    case TransportType::ground: return "Наземный транспорт";
-    case TransportType::air:    return "Воздушный транспорт";
-    default:                    return "нет данных";
+    case TransportType::ground: S = "Наземный транспорт"; break;
+    case TransportType::air:    S = "Воздушный транспорт"; break;
+    default:                    S = "нет данных"; 
     }
+    return S;
 };
 
 std::string GetTransportVidName(TransportVid TV) {
+    std::string S;
     switch (TV)
     {
-    case TransportVid::boots:          return "Ботинки-вездеходы";
-    case TransportVid::broom:          return "Метла";
-    case TransportVid::camel:          return "Верблюд";
-    case TransportVid::centaur:        return "Кентавр";
-    case TransportVid::eagle:          return "Орел";
-    case TransportVid::speed_camel:    return "Верблюд-скороход";
-    case TransportVid::flying_carpet:  return "Ковер-самолет";
-    default:                           return "нет данных";
+    case TransportVid::boots:          S = "Ботинки-вездеходы"; break;
+    case TransportVid::broom:          S = "Метла"; break;
+    case TransportVid::camel:          S = "Верблюд"; break;
+    case TransportVid::centaur:        S = "Кентавр"; break;
+    case TransportVid::eagle:          S = "Орел"; break;
+    case TransportVid::speed_camel:    S = "Верблюд-скороход"; break;
+    case TransportVid::flying_carpet:  S = "Ковер-самолет"; break;
+    default:                           S = "нет данных";
     }
+    return S;
 };
 
 Transport::Transport() : tType{ TransportType::none }, tVid{ TransportVid::none }, tV{ 0 }, tDistance{ 0 }, tTime{ 0.0 } {}

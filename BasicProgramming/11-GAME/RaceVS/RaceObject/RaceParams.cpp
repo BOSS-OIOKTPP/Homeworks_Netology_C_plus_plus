@@ -1,4 +1,4 @@
-#include<string>
+﻿#include<string>
 #include <iostream>
 #include "RaceParams.h"
 #include "Transport.h"
@@ -11,7 +11,7 @@
 #include "FlyingCarpet.h"
 
 
-
+Game::Game() : Race{ RaceType::none }, RaceDistance{ 0 } {};
 
 // Подготовка объекта к работе
 void Game::InitGame() {

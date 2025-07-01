@@ -1,56 +1,58 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <vector>
 #include "Transport.h"
 
 // Параметры гонки
-class RACEOBJECT_API Game {
+class Game {
 private:
     RaceType Race;                      // Выбранный тип гонки
     std::vector<Transport*> Transports; // Массив указателей на транспортные средства участвующие в гонке        
     int RaceDistance;                   // Дистанция
 public:
-    ~Game();
+    RACEOBJECT_API Game();
+
+    RACEOBJECT_API ~Game();
 
     // Подготовка объекта к работе
-    void InitGame();
+    RACEOBJECT_API void InitGame();
     // Очищаем список транспортных средств
-    void ClearGame();
+    RACEOBJECT_API void ClearGame();
     // Создаем транспорт 
-    Transport* CreateTransport(TransportVid TV);
+    RACEOBJECT_API Transport* CreateTransport(TransportVid TV);
     // Добавляем транспорт для гонок нужного типа
-    void AddTransport(Transport* T);
+    RACEOBJECT_API void AddTransport(Transport* T);
     // Определяем количество зарегистрированных транспортных средств
-    size_t GetTransportCount();
+    RACEOBJECT_API size_t GetTransportCount();
     // Записываем тип гонки
-    void SetRace(RaceType R);
+    RACEOBJECT_API void SetRace(RaceType R);
     // Записываем дистанцию гонки
-    void SetRaceDistance(int D);
+    RACEOBJECT_API void SetRaceDistance(int D);
     // Прочитали тип гонки
-    RaceType GetRace();
+    RACEOBJECT_API RaceType GetRace();
     // Прочитали дистанцию гонки
-    int GetRaceDistance();
+    RACEOBJECT_API int GetRaceDistance();
      
 
     // Проверка транспорта на соответствие гонке
     // true - транспорт соответствует выбранной гонке
-    bool IsTransportValidForRaceType(Transport* T, std::string& E);
+    RACEOBJECT_API bool IsTransportValidForRaceType(Transport* T, std::string& E);
     // Проверка транспорта на регистрацию, зарегистрировать транспорт можно только 1 раз
     // true - транспорт еще не зарегистрирован на гонку
-    bool IsTransportValidForRegistration(Transport* T, std::string& E);    
-    bool IsTransportValidForRegistration(TransportVid TV, std::string& E);
+    RACEOBJECT_API bool IsTransportValidForRegistration(Transport* T, std::string& E);
+    RACEOBJECT_API bool IsTransportValidForRegistration(TransportVid TV, std::string& E);
 
     
     // Печать состояния игры
-    void PrintState();
+    RACEOBJECT_API void PrintState();
 
     // Печать результатов игры
-    void PrintResult();
+    RACEOBJECT_API void PrintResult();
 
     // Запускаем гонку
-    void Run();
+    RACEOBJECT_API void Run();
 
     // Сортировка транспортных средств по времени прохождения дистанции. Самые быстрые на первом месте
-    void Sort(); 
+    RACEOBJECT_API void Sort();
 };

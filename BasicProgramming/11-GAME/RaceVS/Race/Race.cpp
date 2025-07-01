@@ -169,8 +169,8 @@ int MenuFinal(Game& game) {
 int main()
 {    
     // Установка кодировки консоли Windows
-    SetConsoleCP(65001);   // 1251
-    SetConsoleOutputCP(65001);
+    SetConsoleCP(1251);   
+    SetConsoleOutputCP(1251);
 
     // Создали класс параметров игры и временные переменные
     Game game;

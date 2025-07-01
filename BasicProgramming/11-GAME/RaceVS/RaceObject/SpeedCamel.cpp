@@ -27,7 +27,7 @@ void SpeedCamel::Calc(int distance) {
 	//			Пример 1:	|-----|  |--|	 +  |--|	=  |-----|  |-----|
 	//			Пример 2:	|-----|  |----|  +  ||		=  |-----|  |-----|
 	//   3шаг рассчитываем количество промежутков между отрезками:   Количество промежутков = Количество отрезков - 1						
-	int rest_count = std::ceil(t1 / DrivingTime) - 1;
+	int rest_count = static_cast<int>(std::ceil(t1 / DrivingTime) - 1);
 	if (rest_count == 0) {
 		tTime = t1;							// Время в пути без остановок
 	}

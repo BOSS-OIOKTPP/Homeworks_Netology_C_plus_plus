@@ -26,7 +26,7 @@ void Centaur::Calc(int distance) {
 	//			Пример 1:	|-----|  |--|	 +  |--|	=  |-----|  |-----|
 	//			Пример 2:	|-----|  |----|  +  ||		=  |-----|  |-----|
 	//   3шаг рассчитываем количество промежутков между отрезками:   Количество промежутков = Количество отрезков - 1						
-	int rest_count = std::ceil(t1 / DrivingTime) - 1;
+	int rest_count = static_cast<int>(std::ceil(t1 / DrivingTime) - 1);
 	tTime = t1 + rest_count * RestTime;					// Время в пути c остановками	
 }
 
