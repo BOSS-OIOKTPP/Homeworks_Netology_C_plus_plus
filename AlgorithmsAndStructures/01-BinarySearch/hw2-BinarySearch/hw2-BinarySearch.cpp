@@ -15,19 +15,19 @@ void PrintArray(std::vector<int>& arr) {
             firstElement = false;
         }
     }
-    std::cout << " ]" << std::endl;    
+    std::cout << " ]" << std::endl;
 };
 
 
 // Функция считает количество элементов больше чем переданное в функцию целое число
 int CountElementsGreaterThan(const std::vector<int>& A, int T) {
     int left = 0;             // Левый индекс рассматриваемого интервала в массиве
-    int right = A.size() - 1; // Правый индекс рассматриваемого интервала в массиве
-    int res = A.size();       // Изначально считаем, что нет элементов массива больше чем T
+    int right = static_cast<int>(A.size()) - 1; // Правый индекс рассматриваемого интервала в массиве
+    int res = static_cast<int>(A.size());       // Изначально считаем, что нет элементов массива больше чем T
 
     while (left <= right) {
         // находим середину интервала
-        int i = left + (right - left) / 2;  
+        int i = left + (right - left) / 2;
 
         // если значение элемента массива в i больше Т, то 
         // 1 - устанавливаем новую правую границу левее этого индекса
@@ -50,7 +50,7 @@ int CountElementsGreaterThan(const std::vector<int>& A, int T) {
     //                          ---------------------------------------
     //      Индекс первого элемента больше T:   3  , тогда     
     //      Количество элементов больше T:      9 - 3 = 6
-    return A.size() - res;
+    return static_cast<int>(A.size()) - res;
 }
 
 // *** Итоговое меню   ***
@@ -84,8 +84,8 @@ int main()
     SetConsoleOutputCP(1251);
 
     std::vector<int> SortedArray = { 14, 16, 19, 32, 32, 32, 56, 69, 72 };
-    int intT{0};
-    int intReplay{0};
+    int intT{ 0 };
+    int intReplay{ 0 };
 
     while (true) {
         // Очищаем консоль 
