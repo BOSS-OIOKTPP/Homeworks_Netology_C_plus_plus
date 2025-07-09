@@ -124,6 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fibonacci.cpp" />
+    <ClCompile Include="FibonacciTree.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FibonacciTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
