@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Fibonacci.cpp">
+    <ClCompile Include="FibonacciFast.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

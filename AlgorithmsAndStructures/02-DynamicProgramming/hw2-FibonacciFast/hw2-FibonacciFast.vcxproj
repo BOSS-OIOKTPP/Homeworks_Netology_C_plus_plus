@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b6806693-25fd-4dae-ad06-214510c44059}</ProjectGuid>
-    <RootNamespace>hw1Fibonacci</RootNamespace>
+    <ProjectGuid>{2fe97fa7-3df3-4936-a7b2-75fd0cde604a}</ProjectGuid>
+    <RootNamespace>hw2FibonacciFast</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Fibonacci.cpp" />
+    <ClCompile Include="FibonacciFast.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

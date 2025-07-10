@@ -2,19 +2,30 @@
 #include <string>
 #include <windows.h>
 
-int Fibonacci(int n) {
-    if (n == 1) return 0;                        // первое базовое число
-    if (n == 2) return 1;                        // второе базовое число
-    return Fibonacci(n - 1) + Fibonacci(n - 2);  // остальные числа
-}
 
 void PrintFibonacci(int n) {
+    // Создаем массив для хранения чисел Фибоначчи
+    int* arrFib = new int[n];
+
+    // Первое базовое число
+    arrFib[0] = 0;              
+    // Второе базовое число
+    if (n > 1) arrFib[1] = 1;
+    // Вычисляем остальные числа
+    for (int i = 2; i < n; i++) { 
+        arrFib[i] = arrFib[i - 1] + arrFib[i - 2]; 
+    }
+
+    // Выводим результат
     std::cout << "Последовательность Фибоначчи: ";
-    for (int i = 1; i <= n; ++i) {
-        std::cout << Fibonacci(i);
-        if (i != n) 
+    for (int i = 0; i < n; i++) {        
+        std::cout << arrFib[i];
+        if (i != n - 1)
             std::cout << ", ";  // Запятая после всех чисел, кроме последнего
     }
+    
+    // Удаляем массив
+    delete[] arrFib;
 };
 
 
@@ -60,7 +71,7 @@ int main()
             // Очищаем консоль 
             system("cls");
 
-            std::cout << "Программа рассчитывает числа Фибоначчи рекурсивно по формуле F(n) = F(n-1) + F(n-2) для n > 1" << std::endl;
+            std::cout << "Программа рассчитывает числа Фибоначчи по формуле F(n) = F(n-1) + F(n-2) для n > 1" << std::endl;
             std::cout << "Введите количество чисел Фибоначчи в интервале n [1; 10] : ";
             std::cin >> intN;
             std::cin.clear(); // Сбрасываем флаги ошибок, например, если ввели букву
