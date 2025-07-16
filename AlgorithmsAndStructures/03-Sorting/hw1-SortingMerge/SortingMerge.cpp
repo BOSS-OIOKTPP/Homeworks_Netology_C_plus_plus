@@ -4,60 +4,60 @@
 
 
 // Слияние двух отсортированных массивов
-void merge(int* arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-
-    // Создаем временные массивы
-    int* L = new int[n1];
-    int* R = new int[n2];
-
-    // Копируем данные во временные массивы
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
-
-    // Выполняем слияние двух сортированных массивов
+// int* arr     - исходный массив, куда запишем отсортированные значения
+// int* L       - левая часть исходного массива 
+// int size_L   - размер левого массива
+// int* R       - правая часть исходного массива
+// int size_R   - размер правого массива
+void merge(int* arr, int* L, int size_L, int* R, int size_R) {
     int i = 0;
     int j = 0;
-    int k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
+    int k = 0;
+    
+    // Пока не вышли за размер левого или правого массива проводим сравнение
+    while (i < size_L && j < size_R) {
+        if (L[i] <= R[j])   { 
+            arr[k] = L[i]; i++; 
         }
-        else {
-            arr[k] = R[j];
-            j++;
+        else { 
+            arr[k] = R[j]; j++; 
         }
         k++;
     }
 
     // Копируем оставшиеся элементы L[], если они остались
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
-    }
-
-    // Копируем оставшиеся элементы R[], если они остались
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
-    }
-
-    // Освобождаем память
-    delete[] L;
-    delete[] R;
+    while (i < size_L) { arr[k] = L[i]; i++; k++; }
+    // или копируем оставшиеся элементы R[], если они остались
+    while (j < size_R) { arr[k] = R[j]; j++; k++; }
 }
 
 
-
 void merge_sort(int* arr, int size) {
+    // Если размер массива равен 1, то выходим
+    if (size == 1) return;
 
+    // разбиваем массив на 2 части
+    int size_L = size / 2;          // размер левой части
+    int size_R = size - size_L;     // размер правой части
 
+    // Создаем временные массивы
+    int* L = new int[size_L];
+    int* R = new int[size_R];
+
+    // Копируем данные во временные массивы
+    for (int i = 0; i < size_L; i++) { L[i] = arr[i]; }
+    for (int j = 0; j < size_R; j++) { R[j] = arr[size_L + j]; }
+
+    // Сортируем левую и правую части
+    merge_sort(L, size_L);
+    merge_sort(R, size_R);
+
+    // Сливаем отсортированные половины
+    merge(arr, L, size_L, R, size_R);
+    
+    // Освобождаем память
+    delete[] L;
+    delete[] R;
 }
 
 
@@ -91,28 +91,31 @@ int main()
     std::cout << "Исходный массив 1: ";
     print_array(arr1, size1);
     merge_sort(arr1, size1);
+    std::cout << std::endl;
     std::cout << "Отсортированный массив 1: ";
     print_array(arr1, size1);
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
+
 
     std::cout << "Исходный массив 2: ";
     print_array(arr2, size2);
     merge_sort(arr2, size2);
+    std::cout << std::endl;
     std::cout << "Отсортированный массив 2: ";
     print_array(arr2, size2);
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 
-    std::cout << "\nИсходный массив 3: ";
+    std::cout << "Исходный массив 3: ";
     print_array(arr3, size3);
     merge_sort(arr3, size3);
+    std::cout << std::endl;
     std::cout << "Отсортированный массив 3: ";
     print_array(arr3, size3);
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 
-
-    std::cout << std::endl;
-    std::cout << "Нажмите любую клавишу для завершения программы." << std::endl;
-    std::cout << std::endl;
+    //std::cout << std::endl;
+    //std::cout << "Нажмите любую клавишу для завершения программы." << std::endl;
+    //std::cout << std::endl;
 
     system("pause");
 
