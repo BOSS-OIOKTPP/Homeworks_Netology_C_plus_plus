@@ -2,38 +2,57 @@
 #include <string>
 #include <windows.h>
 
-
-
-void quick_sort(int* arr, int L, int R) {
-    // Выход из рекурсии
-    if (L > R) return;
-
-    int p = arr[(L + R) / 2];   // опорное значение запоминаем посередине массива
-    int i = L;                  // начальное значение индекса при движении по массиву слева направо
-    int j = R;                  // начальное значение индекса при движении по массиву справа налево
-    while (i <= j) {
-        while (arr[i] < p) i++;     // ищим значение массива больше или равно p двигаясь по массиву от левой границы
-        while (arr[j] > p) j--;     // ищим значение массива меньше или равно p двигаясь по массиву от правой границы
-        //
-        if (i <= j) {
-            // меняем местами эти значения
-            int tmp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = tmp;
-            // индекс i на шаг увеличиваем
-            i++;
-            // индекс j на шаг уменьшаем
-            j--;
+// Находим минимальное значение массива
+int arr_min(const int* arr, int size) {
+    int min_val = arr[0]; 
+    for (int i = 1; i < size; ++i) {
+        if (arr[i] < min_val) {
+            min_val = arr[i]; 
         }
     }
-    // После цикла j < i
-    // запускаем рекурсивно сортировку по левой части массива
-    quick_sort(arr, L, j);
-    // запускаем рекурсивно сортировку по правой части массива
-    quick_sort(arr, L, j);
+    return min_val;
+}
+
+// Находим максимальное значение массива
+int arr_max(const int* arr, int size) {
+    int max_val = arr[0];
+    for (int i = 1; i < size; ++i) {
+        if (arr[i] > max_val) {
+            max_val = arr[i];
+        }
+    }
+    return max_val;
 }
 
 
+void count_sort(int* arr, int size) {
+    const int min_val = arr_min(arr, size);
+    const int max_val = arr_max(arr, size);
+    const int range = max_val - min_val + 1;
+
+    // Создаем массив для подсчета количества повторений чисел в массиве arr
+    // Сами значения массива arr будут частью индексов массива count, значения будут содержать количество повторений
+    int* count = new int[range]();
+
+    // Подсчитываем количество каждого элемента в массиве arr и записываем в count
+    for (int i = 0; i < size; ++i) {
+        int idx = arr[i] - min_val;     // индекс для массива count
+        count[idx]++;                   // увеличиваем значение на единицу
+    }
+
+    // т.к. мы использовали значения из массива arr как индексы в массиве count, то теперь мы можем 
+    // совершить обратную операцию - заполнить массив arr уже в отсортированном порядке  
+    // не забываем добавить min_val к индексу массива count, т.к. мы делали преобразование значения массива arr в индексы массива count выше 
+    int i = 0;
+    for (int idx = 0; idx < range; ++idx) {
+        // повторяем столько раз сколько записано в count        
+        while (count[idx] > 0) {            
+            arr[i] = min_val + idx;
+            i++; 
+            count[idx]--;
+        }
+    }
+}
 
 // Печатаем массив
 void print_array(int* arr, int size) {
@@ -41,7 +60,6 @@ void print_array(int* arr, int size) {
         std::cout << arr[i] << " ";
     }
 }
-
 
 
 // ГЛАВНАЯ ПРОГРАММА
@@ -65,7 +83,7 @@ int main()
     // Сортировка и вывод результатов
     std::cout << "Исходный массив 1: ";
     print_array(arr1, size1);
-    quick_sort(arr1, 0,size1-1);
+    count_sort(arr1, size1);
     std::cout << std::endl;
     std::cout << "Отсортированный массив 1: ";
     print_array(arr1, size1);
@@ -74,7 +92,7 @@ int main()
 
     std::cout << "Исходный массив 2: ";
     print_array(arr2, size2);
-    quick_sort(arr2, 0, size2 - 1);
+    count_sort(arr2, size2);
     std::cout << std::endl;
     std::cout << "Отсортированный массив 2: ";
     print_array(arr2, size2);
@@ -82,7 +100,7 @@ int main()
 
     std::cout << "Исходный массив 3: ";
     print_array(arr3, size3);
-    quick_sort(arr3, 0, size3 - 1);
+    count_sort(arr3, size3);
     std::cout << std::endl;
     std::cout << "Отсортированный массив 3: ";
     print_array(arr3, size3);
