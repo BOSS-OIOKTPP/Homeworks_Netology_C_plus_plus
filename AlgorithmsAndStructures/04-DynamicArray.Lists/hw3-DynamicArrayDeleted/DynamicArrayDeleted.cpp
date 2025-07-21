@@ -41,14 +41,14 @@ int main()
             continue;  // Пропускаем итерацию
         }
 
-        if (logical_size >= 0 && logical_size <= actual_size) 
+        if (logical_size > 0 && logical_size <= actual_size) 
             break;
 
         if (logical_size > actual_size) 
             std::cout << "Ошибка! Логический размер массива не может превышать фактический!" << std::endl << std::endl;        
 
-        if (logical_size < 0) 
-            std::cout << "Ошибка! Логический размер массива не может быть меньше 0!" << std::endl << std::endl;        
+        if (logical_size <= 0) 
+            std::cout << "Ошибка! Логический размер массива не может быть меньше 1!" << std::endl << std::endl;        
     }
 
     // Создаем массив
@@ -78,17 +78,13 @@ int main()
     // Вводим элемент для добавления
     while (true) {
         int tmp{ 0 };
-        std::cout << "Введите элемент для добавления: ";
+        std::cout << "Удалить первый элемент? 1-да";
         std::cin >> tmp;
-        if (!std::cin) {
-            std::cout << "Ошибка! Введите целое число!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // Очищаем буфер до символа новой строки
-            continue;  // Пропускаем итерацию
-        }
+        std::cin.clear();
+        std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // Очищаем буфер до символа новой строки
         
         // выход из цикла и программы
-        if (tmp == 0) {
+        if (tmp != 1) {
             // Выводим на экран результат
             std::cout << "Спасибо! Ваш массив: ";
             print_dynamic_array(arr, logical_size, actual_size);
@@ -96,23 +92,43 @@ int main()
             break;
         }
 
-        // создаем массив в 2 раза больше чем был и копируем в него данные из первово массива
-        if (logical_size == actual_size) {
-            tmpArray = new int[2 * actual_size];
-            for (int i = 0; i < actual_size; ++i) 
-                tmpArray[i] = arr[i];
-            // удаляем старый массив
-            delete[] arr;
-            // запоминаем ссылку на новый массив
-            arr = tmpArray;
-            // увеличиваем фактический размер в 2 раза
-            actual_size *= 2;
-        }
+        // 
+        if (tmp == 1) {
+            int logical_size_new = logical_size - 1;
 
-        // Запоминаем введенное значение
-        arr[logical_size] = tmp;
-        // увеличиваем логический размер на 1
-        logical_size++;        
+            if (logical_size_new == -1) {
+                std::cout << "Невозможно удалить первый элемент, так как массив пустой. До свидания!" << std::endl;
+                break;
+            }
+
+            // если логический размер массива, уменьшенный на единицу, строго больше одной трети фактического размера, 
+            // то сдвигаем все элементы массива, кроме первого, влево на 1
+            if (logical_size_new == 0) {
+                // логический размер уменьшится ниже
+            }
+            else if (logical_size_new > actual_size / 3) {
+                for (int i = 1; i < logical_size_new; ++i) 
+                    arr[i - 1] = arr[i];
+            } 
+            // если логический размер массива, уменьшенный на единицу, меньше или равен одной трети его фактического размера, 
+            // тогда создаём новый массив размером в 3 раза меньше. В него перекладываем элементы из старого массива, 
+            // кроме первого, со сдвигом индекса на 1 влево. Фактический и логический размеры массива изменяют своё значение.
+            else {
+                // уменьшаем фактический размер в 3 раза
+                actual_size /= 3;
+                // создаем новый массив
+                tmpArray = new int[actual_size];
+                // копируем данные в новый массив
+                for (int i = 0; i < logical_size_new; ++i)
+                    tmpArray[i] = arr[i];
+                // удаляем старый массив
+                delete[] arr;
+                // запоминаем ссылку на новый массив
+                arr = tmpArray;
+            }
+            // запоминаем новый логический размер 
+            logical_size = logical_size_new;
+        }
         
         // Выводим на экран результат
         std::cout << "Динамический массив: ";
