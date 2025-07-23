@@ -15,8 +15,7 @@ int calculate_level(int index) {
     return level;
 }
 
-
-void print_pyramid(int* arr, int size) {
+void print_pyramid(int* arr, int size, int select) {
     
     if (size==0) {
         std::cout << "Пирамида пуста" << std::endl;
@@ -24,46 +23,55 @@ void print_pyramid(int* arr, int size) {
     }
 
     // Корневой элемент
-    std::cout << "0 root " << arr[0] << std::endl;
+    int level = 0;
+    std::string child_type = "root";
+    std::string child_select = ((select == 0) ? "     *" : "");
+    std::cout << level << " "<< child_type << " " << arr[0] << child_select << std::endl;
 
     for (int i = 1; i < size; ++i) {
-        int level = calculate_level(i);
+        level = calculate_level(i);
         int parent_index = (i - 1) / 2;
         int parent_value = arr[parent_index];
-        std::string child_type = (i % 2 == 1) ? "left" : "right";
+        child_type = (i % 2 == 1) ? "left" : "right";
+        child_select = ((select == i) ? "     *" : "");
 
-        std::cout << level << " " << child_type << "(" << parent_value << ") " << arr[i] << std::endl;
+        std::cout << level << " " << child_type << "(" << parent_value << ") " << arr[i] << child_select << std::endl;
     }
 };
 
 // Печатаем массив
 void print_array(int* arr, int size) {
+    std::cout << "[";
     for (int i = 0; i < size; i++) {
-        std::cout << arr[i] << " ";
+        std::cout << arr[i] << (i==(size-1)?"":", ");
     }
+    std::cout << "]";
 }
-
 
 // ***   Движение по пирамиде   ***
 int travel(int* arr, int size) {
     char inputChar;
-    int index{0}; // Текущий индекс, где мы находимся. По умолчанию - это вершина 
-
-
-    std::string strErr1;
-    //std::string strErr2;
-
+    int index{0};           // Текущий индекс, где мы находимся. По умолчанию - это вершина 
+    std::string strErr1;    // Сообщение об ошибке
 
     while (true) {
         // Очищаем консоль 
         system("cls");
-        // Выводим массив
-        print_array(arr, size);
-        std::cout << std::endl;
+
         std::cout << "Для движения по пирамиде используйте клавиши:" << std::endl;
-        std::cout << "W - вверх, A - влево, D - вправо + Enter"  << std::endl;
+        std::cout << "W - вверх, A - влево, D - вправо + Enter" << std::endl;
         std::cout << "Для выхода нажмите Q + Enter" << std::endl;
-        
+        std::cout << std::endl;
+
+        // Выводим массив
+        std::cout << "Пирамида: " << std::endl;
+        print_pyramid(arr, size, index);
+        std::cout << std::endl;
+
+        // Показываем ошибку
+        if (strErr1 != "")
+            std::cout << strErr1 << std::endl << std::endl;
+
         std::cout << "Выберите направление: ";
         std::cin >> inputChar;
         std::cin.clear(); // Сбрасываем флаги ошибок
@@ -121,10 +129,12 @@ int ArraySelection( int* arr1, int size1,
         // Очищаем консоль от прошлой игры
         system("cls");
 
-        std::cout << "Добро пожаловать в навигатор!" << std::endl;
-        std::cout << "1. "; print_array(arr1, size1); std::cout << std::endl;
-        std::cout << "2. "; print_array(arr2, size2); std::cout << std::endl;
-        std::cout << "3. "; print_array(arr3, size3); std::cout << std::endl;
+        std::cout << "Добро пожаловать в навигатор по пирамиде!" << std::endl;
+        std::cout << std::endl;
+        std::cout << "1.  "; print_array(arr1, size1); std::cout << std::endl;
+        std::cout << "2.  "; print_array(arr2, size2); std::cout << std::endl;
+        std::cout << "3.  "; print_array(arr3, size3); std::cout << std::endl;
+        std::cout << std::endl;
         std::cout << "Выберите массив: ";
 
         std::cin >> intArray;
@@ -138,6 +148,30 @@ int ArraySelection( int* arr1, int size1,
     return 0;
 }
 
+// *** Итоговое меню   ***
+int MenuFinal() {
+    int intReplay;
+    while (true) {
+        // Очищаем консоль и повторяем вопрос
+        system("cls");
+
+        // Выводим меню
+        //std::cout << std::endl;
+        //std::cout << std::endl;
+        std::cout << "1. Выбрать другой массив" << std::endl;
+        std::cout << "2. Выйти" << std::endl;
+        std::cout << "Выберите действие: ";
+
+        std::cin >> intReplay;
+        std::cin.clear(); // Сбрасываем флаги ошибок, например, если ввели букву
+        std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // Очищаем буфер до символа новой строки
+
+        if (intReplay >= 1 && intReplay <= 2) {
+            break;
+        }
+    }
+    return intReplay;
+}
 
 
 
@@ -167,60 +201,28 @@ int main()
 
     while (true) {
         // Инициируем объект
-        
-        intRun = 0;
         intReplay = 0;
 
         // ***   Выбор массива   ***
         intArray = ArraySelection(arr1, size1, arr2, size2, arr3, size3 );
 
-        while (true) {
-            // ***   Регистрация транспорта   ***
-            TransportSelection(game);
-
-            // ***   Начать гонку   ***
-            intRun = GameRun(game);
-            if (intRun == 2) break;     // Был запуск игры, поэтому переходим к показу результатов
-        }
-
+        // Запускаем движение по пирамиде
+        if (intArray==1)
+            travel(arr1, size1);
+        else if (intArray == 2)
+            travel(arr2, size2);
+        else 
+            travel(arr3, size3);
+        
         // *** Итоговое меню   ***
-        intReplay = MenuFinal(game);
-        if (intReplay == 2) break;      // Выходим из игры        
+        intReplay = MenuFinal();
+        if (intReplay == 2) break;      // Выходим
     }
 
-    //std::cout << std::endl;
+    std::cout << std::endl;
     //std::cout << "Игра завершена! Нажмите любую клавишу." << std::endl;
-    //std::cout << std::endl;
-
-
-
-
-
-
-
-    // Сортировка и вывод результатов
-    std::cout << "Исходный массив 1: ";
-    print_array(arr1, size1);
-    std::cout << std::endl;
-    std::cout << "Пирамида: " << std::endl;
-    print_pyramid(arr1, size1);
     std::cout << std::endl;
 
-/*
-    std::cout << "Исходный массив 2: ";
-    print_array(arr2, size2);
-    std::cout << std::endl;
-    std::cout << "Пирамида: " << std::endl;
-    print_pyramid(arr2, size2);
-    std::cout << std::endl;
-
-    std::cout << "Исходный массив 3: ";
-    print_array(arr3, size3);  
-    std::cout << std::endl;
-    std::cout << "Пирамида: " << std::endl;
-    print_pyramid(arr3, size3);
-    std::cout << std::endl;
-    */
 
     system("pause");
 
