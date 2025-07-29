@@ -16,14 +16,14 @@ int simple_string_hash(std::string& S, int start, int length) {
 
 // Выполняем поиск
 int find_substring_light_rabin_karp(std::string& text, std::string& pattern) {
-    int pattern_length = pattern.size();
-    int text_length = text.size();
-    int pattern_hash = simple_string_hash(pattern, 0, pattern_length);
+    int pattern_length  = static_cast<int>(pattern.size());
+    int text_length     = static_cast<int>(text.size());
+    int pattern_hash    = simple_string_hash(pattern, 0, pattern_length);
 
     for (int i = 0; i <= text_length - pattern_length; ++i) {
         int current_hash = simple_string_hash(text, i, pattern_length);
         if (current_hash == pattern_hash) {
-            // Дополнительная проверка на случай коллизии
+            // Дополнительная проверка на случай коллизии, сравниваем посимвольно
             bool match = true;
             for (int j = 0; j < pattern_length; ++j) {
                 if (text[i + j] != pattern[j]) {
@@ -54,6 +54,7 @@ int main()
     
 
     std::cout << "Программа поиска подстроки в заданной строке с помощью упрощённого алгоритма Рабина-Карпа" << std::endl << std::endl;
+    std::cout << "Для выхода из программы введите строку: exit" << std::endl << std::endl;
 
     while (true) {
         std::cout << "Введите строку, в которой будет осуществляться поиск: ";

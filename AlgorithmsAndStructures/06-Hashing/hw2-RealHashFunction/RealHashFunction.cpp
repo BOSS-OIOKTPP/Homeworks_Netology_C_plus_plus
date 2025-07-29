@@ -29,8 +29,7 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    std::string input;
-    int hash;
+    std::string input;    
     int p;
     int n;
 
