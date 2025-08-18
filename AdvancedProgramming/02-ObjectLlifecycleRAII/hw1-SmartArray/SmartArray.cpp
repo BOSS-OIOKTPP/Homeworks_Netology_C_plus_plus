@@ -39,10 +39,13 @@ void SmartArray::add_element(int value) {
     FData[FLogicalSize-1] = value;    
 }
 
-// Получение элемента по индексу
-int SmartArray::at(int index) {
+// Перегрузка оператора [] для удобства
+int& SmartArray::operator[](int index) {
     if (index >= FActualSize) {
         throw std::out_of_range("Index out of range");
     }
-    return data_[index];
+    return FData[index];
+}
+const int& SmartArray::operator[](int index) const {
+    return operator[](index); // Вызываем неконстантную версию
 }
