@@ -1,47 +1,47 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include "SmartArrayNew.h"
 
-// Конструктор
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 SmartArray::SmartArray(int size) {
     FActualSize = size;
     FLogicalSize = 0;
     FData = new int[size];
 }
-// Деструктор
+// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 SmartArray::~SmartArray() {
     delete[] FData;
 }
-// Количество элементов под которое выделена память
+// РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РїРѕРґ РєРѕС‚РѕСЂРѕРµ РІС‹РґРµР»РµРЅР° РїР°РјСЏС‚СЊ
 int SmartArray::ActualSize() const { 
     return FActualSize;
 }
-// Фактическое количество элементов   
+// Р¤Р°РєС‚РёС‡РµСЃРєРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ   
 int SmartArray::LogicalSize() const {
     return FLogicalSize;
 }
-// Добавление элемента (с динамическим расширением)
+// Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° (СЃ РґРёРЅР°РјРёС‡РµСЃРєРёРј СЂР°СЃС€РёСЂРµРЅРёРµРј)
 void SmartArray::add_element(int value) {
-    // создаем массив в 2 раза больше чем был и копируем в него данные из первово массива
+    // СЃРѕР·РґР°РµРј РјР°СЃСЃРёРІ РІ 2 СЂР°Р·Р° Р±РѕР»СЊС€Рµ С‡РµРј Р±С‹Р» Рё РєРѕРїРёСЂСѓРµРј РІ РЅРµРіРѕ РґР°РЅРЅС‹Рµ РёР· РїРµСЂРІРѕРІРѕ РјР°СЃСЃРёРІР°
     if (FLogicalSize == FActualSize) {
         int* tmpArray = new int[2 * FActualSize];
         for (int i = 0; i < FActualSize; ++i)
             tmpArray[i] = FData[i];
-        // удаляем старый массив
+        // СѓРґР°Р»СЏРµРј СЃС‚Р°СЂС‹Р№ РјР°СЃСЃРёРІ
         delete[] FData;
-        // запоминаем ссылку на новый массив
+        // Р·Р°РїРѕРјРёРЅР°РµРј СЃСЃС‹Р»РєСѓ РЅР° РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ
         FData = tmpArray;
-        // увеличиваем фактический размер в 2 раза
+        // СѓРІРµР»РёС‡РёРІР°РµРј С„Р°РєС‚РёС‡РµСЃРєРёР№ СЂР°Р·РјРµСЂ РІ 2 СЂР°Р·Р°
         FActualSize *= 2;
     }
 
-    // увеличиваем логический размер на 1
+    // СѓРІРµР»РёС‡РёРІР°РµРј Р»РѕРіРёС‡РµСЃРєРёР№ СЂР°Р·РјРµСЂ РЅР° 1
     FLogicalSize++;
-    // запоминаем введенное значение
+    // Р·Р°РїРѕРјРёРЅР°РµРј РІРІРµРґРµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
     FData[FLogicalSize-1] = value;    
 }
 
-// Печать массива
+// РџРµС‡Р°С‚СЊ РјР°СЃСЃРёРІР°
 std::string SmartArray::Print() {
     std::string str;
     str = "";
@@ -52,33 +52,53 @@ std::string SmartArray::Print() {
     return str;
 }
 
-// Перегрузка оператора [] 
+// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° [] 
 int& SmartArray::operator[](int index) {
     if (index >= FLogicalSize) {
         //throw std::out_of_range("Index out of range");
         throw std::out_of_range(
-            "Индекс массива SmartArray[" + std::to_string(index) + "]"
-            " выходит за границу (Фактический размер [0; " + std::to_string(FLogicalSize-1) + "])"
+            "РРЅРґРµРєСЃ РјР°СЃСЃРёРІР° SmartArray[" + std::to_string(index) + "]"
+            " РІС‹С…РѕРґРёС‚ Р·Р° РіСЂР°РЅРёС†Сѓ (Р¤Р°РєС‚РёС‡РµСЃРєРёР№ СЂР°Р·РјРµСЂ [0; " + std::to_string(FLogicalSize-1) + "])"
         );
     }
     return FData[index];
 }
 const int& SmartArray::operator[](int index) const {
-    return operator[](index); // Вызываем неконстантную версию
+    return operator[](index); // Р’С‹Р·С‹РІР°РµРј РЅРµРєРѕРЅСЃС‚Р°РЅС‚РЅСѓСЋ РІРµСЂСЃРёСЋ
 }
 
-// Перегрузка оператора =
+// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° = 
 SmartArray& SmartArray::operator=(const SmartArray& other) {
-    if (this != &other) { // Проверка на самоприсваивание
-        if (FLogicalSize < other.FLogicalSize) {
-            // Уравниваем количество элементов
-            for (int i = 0; i < (other.FLogicalSize - FLogicalSize); ++i) 
-                this->add_element(0);
-        }
+    if (this != &other) { // РџСЂРѕРІРµСЂРєР° РЅР° СЃР°РјРѕРїСЂРёСЃРІР°РёРІР°РЅРёРµ
+        // РћСЃРІРѕР±РѕР¶РґР°РµРј С‚РµРєСѓС‰РёРµ СЂРµСЃСѓСЂСЃС‹
+        delete[] FData;
 
-        // Выполняем копирование из одного массива в другой
-        for (int i = 0; i < other.FLogicalSize; ++i)
+        // РљРѕРїРёСЂСѓРµРј РґР°РЅРЅС‹Рµ РёР· РґСЂСѓРіРѕРіРѕ РѕР±СЉРµРєС‚Р°
+        FActualSize = other.FActualSize;
+        FLogicalSize = other.FLogicalSize;
+        FData = new int[FActualSize];
+
+        // РљРѕРїРёСЂСѓРµРј СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°
+        for (int i = 0; i < FLogicalSize; ++i) {
             FData[i] = other.FData[i];
+        }
     }
     return *this;
 }
+
+
+// РќР•РџР РђР’РР›Р¬РќР«Р™ Р’РђР РРђРќРў
+//SmartArray& SmartArray::operator=(const SmartArray& other) {
+//    if (this != &other) { // РџСЂРѕРІРµСЂРєР° РЅР° СЃР°РјРѕРїСЂРёСЃРІР°РёРІР°РЅРёРµ
+//        if (FLogicalSize < other.FLogicalSize) {
+//            // РЈСЂР°РІРЅРёРІР°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ
+//            for (int i = 0; i < (other.FLogicalSize - FLogicalSize); ++i) 
+//                this->add_element(0);
+//        }
+//
+//        // Р’С‹РїРѕР»РЅСЏРµРј РєРѕРїРёСЂРѕРІР°РЅРёРµ РёР· РѕРґРЅРѕРіРѕ РјР°СЃСЃРёРІР° РІ РґСЂСѓРіРѕР№
+//        for (int i = 0; i < other.FLogicalSize; ++i)
+//            FData[i] = other.FData[i];
+//    }
+//    return *this;
+//}

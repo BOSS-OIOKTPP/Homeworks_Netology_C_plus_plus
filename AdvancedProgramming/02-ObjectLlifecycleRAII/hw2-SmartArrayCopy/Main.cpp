@@ -33,8 +33,9 @@ int main() {
 
 	// Массив 1 после копирования
 	std::cout << "Массив 1 = Массив 2" << std::endl << std::endl;
-	std::cout << "Массив 1: " << arr.Print() << std::endl << std::endl;
-	
+	std::cout << "Массив 1: " << arr.Print() << std::endl;
+	std::cout << "Массив 2: " << new_array.Print() << std::endl << std::endl;
+
 	//// Копируем	
 	//new_array = arr;
 
