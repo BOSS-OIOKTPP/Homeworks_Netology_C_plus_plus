@@ -16,8 +16,7 @@ int main() {
     test[1][0] = 0; test[1][1] = 0; test[1][2] = 0;
 
     test.Print();
-    test.Size();
-
+    std::cout << "Размер массива: " << test.Size() << std::endl;
     std::cout << "Элемент [0; 0] = " << test[0][0] << std::endl;
 
     std::cout << std::endl;

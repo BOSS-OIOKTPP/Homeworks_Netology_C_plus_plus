@@ -29,9 +29,8 @@ public:
     int Cols() const { return FCols; }        
 
     // Размер массивав
-    void Size() {
-        std::cout << "Количество строк: " << FRows << std::endl;
-        std::cout << "Количество столбцов: " << FCols << std::endl;
+    const int Size() const {
+        return FRows * FCols;
     }
     
     // Перегрузка оператора []
