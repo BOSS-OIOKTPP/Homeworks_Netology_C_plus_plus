@@ -22,13 +22,15 @@ public:
     Table(const Table& other) : FData(nullptr), FRows(0), FCols(0) {
         *this = other;   // используем перегрузку оператора =
     }
-
+    
+    // Деструктор
     ~Table() {  
         for (int i = 0; i < FRows; ++i) {
             delete FData[i];  
         }        
         delete[] FData;
     }
+
     // Количество строк
     int Rows() const { return FRows; }
     // Количество столбцов

@@ -7,9 +7,6 @@ private:
     T* FData;         // Указатель на массив
     int FSize;        // Количество элементов
 public: 
-    // Конструктор по умолчанию
-    Array() : FData(nullptr), FSize(0) {}
-
     // Конструктор
     Array(int size) : FData(new T[size]), FSize(size) {}
 
@@ -17,7 +14,7 @@ public:
     Array(const Array& other) : FData(nullptr), FSize(0) {
         *this = other; // Используем уже реализованный operator=
     }
-
+    
     // Деструктор
     ~Array() {
         delete[] FData;
