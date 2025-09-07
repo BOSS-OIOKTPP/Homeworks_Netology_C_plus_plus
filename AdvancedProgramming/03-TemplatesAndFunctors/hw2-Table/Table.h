@@ -17,6 +17,12 @@ public:
             FData[i] = new Array<T>(cols);
         }
     }
+    
+    // Конструктор копирования
+    Table(const Table& other) : FData(nullptr), FRows(0), FCols(0) {
+        *this = other;   // используем перегрузку оператора =
+    }
+
     ~Table() {  
         for (int i = 0; i < FRows; ++i) {
             delete FData[i];  
@@ -58,8 +64,8 @@ public:
             delete[] FData;            
 
             // Копируем данные из другого объекта
-            FRows = other.Rows;
-            FCols = other.Cols;
+            FRows = other.FRows;
+            FCols = other.FCols;
             FData = new Array<T>*[FRows];
             // Создаем новые строки
             for (int i = 0; i < FRows; ++i) {
@@ -68,7 +74,7 @@ public:
             // Копируем элементы
             for (int i = 0; i < FRows; ++i) {
                 for (int j = 0; j < FCols; ++j) {
-                    FData[i][j] = other.FData[i][j];
+                    (*FData[i])[j] = (*other.FData[i])[j];
                 }
             }
         }

@@ -12,7 +12,12 @@ public:
 
     // Конструктор
     Array(int size) : FData(new T[size]), FSize(size) {}
-    
+
+    // Конструктор копирования
+    Array(const Array& other) : FData(nullptr), FSize(0) {
+        *this = other; // Используем уже реализованный operator=
+    }
+
     // Деструктор
     ~Array() {
         delete[] FData;
