@@ -15,9 +15,18 @@ public:
     // Запрещаем оператор присваивания
     unique_ptr& operator=(const unique_ptr&) = delete;
 
-    // Перегружаем оператор *
+    // Оператор * с проверкой на nullptr
     T& operator*() const {
+        if (!ptr) 
+            throw std::runtime_error("ОШИБКА. Разименование nullptr");        
         return *ptr;
+    }
+
+    // Оператор -> с проверкой на nullptr
+    T* operator->() const {
+        if (!ptr) 
+            throw std::runtime_error("ОШИБКА. Попытка доступа к nullptr");        
+        return ptr;
     }
 
     // Освобождаем владение и возвращаем сырой указатель
