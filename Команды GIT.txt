@@ -3,3 +3,9 @@ git push -u origin main
 
 // Получить из GitHub
 git pull origin main
+
+// добавить файлы в отслеживаемые
+git add -A
+
+// зафиксировать изменения
+git commit -m "коментарий"
