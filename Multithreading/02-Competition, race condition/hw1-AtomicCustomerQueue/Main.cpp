@@ -22,7 +22,7 @@ void operatorProcess_SegCst();  // Клиент ушел из очереди. У
 void clientProcess_AcqRel();    // Клиент пришел в очередь. Увеличиваем счетчик
 void operatorProcess_AcqRel();  // Клиент ушел из очереди. Уменьшаем счетчик
 
-// 3.    Ослабленное упорядочение - memory_order_relaxed
+// 3.    Ослабленное - memory_order_relaxed
 void clientProcess_Relaxed();    // Клиент пришел в очередь. Увеличиваем счетчик
 void operatorProcess_Relaxed();  // Клиент ушел из очереди. Уменьшаем счетчик
 
@@ -124,23 +124,22 @@ void operatorProcess_SegCst() {
 // Клиент пришел в очередь с использованием acquire-release
 void clientProcess_AcqRel() {
     for (int i = 1; i <= MAX_CLIENTS; ++i) {
-        // Увеличиваем счетчик клиентов с использованием memory_order_acq_rel
+        // Увеличиваем счетчик клиентов                                        т.к. fetch_xxx всегда возвращает значение до изменения
         int currentCount = clientCount.fetch_add(1, std::memory_order_acq_rel) + 1;
         std::cout << "Пришел клиент. Количество клиентов в очереди: " << currentCount << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    // Устанавливаем флаг с release семантикой - гарантируем, что все предыдущие операции видны
+    // Устанавливаем флаг с release семантикой - гарантируем, что все предыдущие операции выполнены
     allClientsArrived.store(true, std::memory_order_release);
     std::cout << "Все клиенты пришли." << std::endl;
 }
 
-// Клиент ушел из очереди с использованием acquire-release
+// Клиент ушел из очереди 
 void operatorProcess_AcqRel() {
-    while (true) {
-        // Проверяем счетчик с acquire семантикой - видим все операции до release в другом потоке
+    while (true) {        
         if (clientCount.load(std::memory_order_acquire) > 0) {
-            // Уменьшаем счетчик с acq_rel - синхронизируем с другими операциями
+            // Уменьшаем счетчик клиентов                                          т.к. fetch_xxx всегда возвращает значение до изменения
             int currentCount = clientCount.fetch_sub(1, std::memory_order_acq_rel) - 1;
             std::cout << "Клиент обслужен. Количество клиентов в очереди: " << currentCount << std::endl;
         }        
@@ -158,28 +157,27 @@ void operatorProcess_AcqRel() {
 }
 
 
-// 3.    Ослабленное упорядочение - memory_order_relaxed
+// 3.    Ослабленное - memory_order_relaxed
 
-// Клиент пришел в очередь с ослабленным упорядочением
+// Клиент пришел в очередь 
 void clientProcess_Relaxed() {
     for (int i = 1; i <= MAX_CLIENTS; ++i) {
-        // Увеличиваем счетчик клиентов с ослабленной семантикой
+        // Увеличиваем счетчик клиентов                                        т.к. fetch_xxx всегда возвращает значение до изменения
         int currentCount = clientCount.fetch_add(1, std::memory_order_relaxed) + 1;
         std::cout << "Пришел клиент. Количество клиентов в очереди: " << currentCount << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    // Устанавливаем флаг с ослабленной семантикой
+    // Устанавливаем флаг 
     allClientsArrived.store(true, std::memory_order_relaxed);
     std::cout << "Все клиенты пришли." << std::endl;
 }
 
-// Клиент ушел из очереди с ослабленным упорядочением
+// Клиент ушел из очереди 
 void operatorProcess_Relaxed() {
-    while (true) {
-        // Проверяем счетчик с ослабленной семантикой
+    while (true) {        
         if (clientCount.load(std::memory_order_relaxed) > 0) {
-            // Уменьшаем счетчик с ослабленной семантикой
+            // Уменьшаем счетчик с ослабленной семантикой                          т.к. fetch_xxx всегда возвращает значение до изменения
             int currentCount = clientCount.fetch_sub(1, std::memory_order_relaxed) - 1;
             std::cout << "Клиент обслужен. Количество клиентов в очереди: " << currentCount << std::endl;
         }
