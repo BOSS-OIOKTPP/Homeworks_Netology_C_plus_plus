@@ -13,7 +13,7 @@ struct MinResult {
 };
 
 // Функция для поиска минимального элемента в части массива
-MinResult findMinResult(std::vector<int>& arr, int start, int stop);
+MinResult findMinResult(std::vector<int>& arr, int start);
 
 // 1 вариант. Функция сортировки выбором
 // Поиск минимального элемента выполняется в текущем потоке
@@ -40,15 +40,21 @@ int main() {
     std::promise<MinResult> prom;
     std::future<MinResult> res = prom.get_future();
     //auto R = std::async(SortAsync, std::ref(data), move(prom));     // вариант 1
-    auto R = std::async(SortAsync2, std::ref(data), move(prom));      // вариант 2
+    auto R = std::async(SortAsync2, std::ref(data), move(prom));      // вариант 2 - с std::async(findMinResult)
 
     // Ждем завершения и получаем результат
     MinResult min = res.get();    
 
+    std::cout << "\nМинимальный элемент data[" << min.index << "] = " << min.value << std::endl;
+
+    // Т.к. поиск минимального значения получит результат раньше чем выполнится сортировка, то 
+    // необходимо подождать завершение потока
+    R.wait();
+
     printArray(data, "\nОтсортированный массив data[]: ");
     std::cout << std::endl;
 
-    std::cout << "Минимальный элемент data[" << min.index << "] = " << min.value << std::endl;
+    
 
     std::cout << std::endl;
     system("pause");
@@ -59,9 +65,9 @@ int main() {
 
 
 // Функция для поиска минимального элемента в части массива
-MinResult findMinResult(std::vector<int>& arr, int start, int stop) {
+MinResult findMinResult(std::vector<int>& arr, int start) {
     MinResult t(start, arr[start]);
-    for (int i = start + 1; i < stop + 1; ++i) {
+    for (int i = start + 1; i < arr.size(); ++i) {
         if (arr[i] < t.value) {
             t.index = i;
             t.value = arr[i];
@@ -70,40 +76,40 @@ MinResult findMinResult(std::vector<int>& arr, int start, int stop) {
     return t;
 }
 
-// Функция сортировки выбором
+// Вариант 1. Функция сортировки выбором
 // Поиск минимального элемента выполняется в текущем потоке
 void SortAsync(std::vector<int>& arr, std::promise<MinResult> prom) {
     int n = arr.size();
     MinResult res{ -1,0 };
     for (int i = 0; i < n - 1; ++i) {
-        res = findMinResult(arr, i, n - 1);
-        if (i == 0)
-            prom.set_value(res);  // Передаем результат через promise
-
+        res = findMinResult(arr, i);
         // Обмениваем элементы
         if (res.index != i)
             std::swap(arr[i], arr[res.index]);
+
+        // Передаем результат - это минимальное значение
+        if (i == 0)
+            prom.set_value(res);  
     }
 }
 
-// Функция сортировки выбором
+// Вариант 2. Функция сортировки выбором
 // Поиск минимального элемента выполняется в параллельном потоке std::async
 void SortAsync2(std::vector<int>& arr, std::promise<MinResult> prom) {
     int n = arr.size();
     MinResult res{ -1,0 };
     for (int i = 0; i < n - 1; ++i) {
-        // Просто используем std::async без packaged_task, 
-        // т.к. нам не надо разделять создание задачи от запуска задачи
-        std::future<MinResult> f = std::async(findMinResult, std::ref(arr), i, n - 1);
+        // запускаем поиск в потоке
+        std::future<MinResult> f = std::async(findMinResult, std::ref(arr), i);
+        // Ждем значение
         res = f.get();
-
-        // Передаем результат - это минимальное значение
-        if (i==0)            
-            prom.set_value(res);
-
         // Обмениваем элементы
         if (res.index != i)
             std::swap(arr[i], arr[res.index]);
+
+        // Передаем результат - это минимальное значение
+        if (i == 0)
+            prom.set_value(res);
     }    
 }
 
