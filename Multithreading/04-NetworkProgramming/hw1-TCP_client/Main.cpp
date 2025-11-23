@@ -5,73 +5,55 @@
 
 #pragma comment(lib, "ws2_32.lib") // Линкуем библиотеку Winsock
 
+
+class UpdClient {
+private:
+    WSAData _wsa_data_;
+    SOCKET _socket_;
+    sockaddr_in _server_addr_{};
+    char* _buffer_ = new char[32] {};
+    int _port_ = 12345;
+public:
+    UpdClient() {
+        int err = WSAStartup(MAKEWORD(2, 2), &_wsa_data_);
+        _socket_ = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        _server_addr_.sin_family = AF_INET;
+        std::string ip = "127.0.0.1";
+        _server_addr_.sin_addr.s_addr = inet_addr(ip.c_str());
+        _server_addr_.sin_port = htons(_port_);        
+    }
+    ~UpdClient() {
+        closesocket(_socket_);
+        WSACleanup();
+    }
+
+    void send_text() {
+        // устанавливаем соединение с сервером
+        if (connect(_socket_, (sockaddr*)&_server_addr_, sizeof(_server_addr_)) == SOCKET_ERROR) {
+            std::cout << "Не удалось подключиться к серверу" << std::endl;
+            return;
+        }
+        std::string hello = "Hello from client";
+        send(_socket_, hello.c_str(), hello.size(), 0);
+        int size_data = recv(_socket_, _buffer_, 32, 0);
+        if (size_data > 0) {
+            _buffer_[size_data] = '\0';
+            std::cout << _buffer_ << std::endl;
+        }
+    }
+
+};
+
+
 int main() {
     // Установка кодировки консоли Windows
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
+    UpdClient client;
+    client.send_text();
 
-    // === 1. Инициализация Winsock ===
-    WSADATA wsaData;
-    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-        std::cerr << "WSAStartup failed.\n";
-        return 1;
-    }
-
-    // === 2. Создание сокета ===
-    SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (clientSocket == INVALID_SOCKET) {
-        std::cerr << "Socket creation failed.\n";
-        WSACleanup();
-        return 1;
-    }
-
-    // === 3. Настройка адреса сервера ===
-    sockaddr_in serverAddr{};
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(12345); // Порт сервера
-    inet_pton(AF_INET, "127.0.0.1", &serverAddr.sin_addr); // IP-адрес сервера
-
-    // === 4. Подключение к серверу ===
-    if (connect(clientSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
-        std::cerr << "Unable to connect to server.\n";
-        closesocket(clientSocket);
-        WSACleanup();
-        return 1;
-    }
-
-    std::cout << "Connected to server.\n";
-
-    // === 5. Отправка сообщения ===
-    const char* message = "Hello from C++ TCP client!";
-    if (send(clientSocket, message, strlen(message), 0) == SOCKET_ERROR) {
-        std::cerr << "Send failed.\n";
-        closesocket(clientSocket);
-        WSACleanup();
-        return 1;
-    }
-
-    std::cout << "Message sent: " << message << "\n";
-
-    // === 6. Получение ответа ===
-    char buffer[1024] = { 0 };
-    int bytesReceived = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
-    if (bytesReceived > 0) {
-        std::cout << "Received from server: " << buffer << "\n";
-    }
-    else if (bytesReceived == 0) {
-        std::cout << "Connection closed by server.\n";
-    }
-    else {
-        std::cerr << "recv failed.\n";
-    }
-
-    // === 7. Завершение работы ===
-    closesocket(clientSocket);
-    WSACleanup();
-
-
-
+    
     std::cout << std::endl;
     system("pause");
 
