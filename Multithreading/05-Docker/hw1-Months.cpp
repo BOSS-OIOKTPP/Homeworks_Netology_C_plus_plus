@@ -18,88 +18,64 @@
 
 #include <iostream>
 #include <locale>
+#include <limits>  // Добавили для numeric_limits
 
-enum class months { 
-    январь=1,
-    февраль,
-    март,
-    апрель,
-    май,
-    июнь,
-    июль,
-    август,
-    сентябрь,
-    октябрь,
-    ноябрь,
-    декабрь
+// Используем английские имена для enum (стандартная практика)
+enum class months {
+    january = 1,
+    february,
+    march,
+    april,
+    may,
+    june,
+    july,
+    august,
+    september,
+    october,
+    november,
+    december
 };
-
 
 int main()
 {
-    setlocale(LC_ALL, "russian");
+    setlocale(LC_ALL, "russian");  // Для вывода кириллицы в консоль
 
     int n{ -1 }; // Номер месяца
     months m{};  // месяц
-   
+
     while (true) {
         n = -1;
-               
+
         std::cout << "Введите номер месяца : ";
         std::cin >> n;
- 
+
         // Очищаем буфер до символа новой строки, т.к. если ввести например так   1d , 
         // то программа прочитает 1, а потом вместо d вернет 0 и завершится.
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-        
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
         if (n == 0) {
             std::cout << "до свидания" << std::endl;
-            return 0;
+            return EXIT_SUCCESS;
         }
 
-        m = static_cast<months>(n);        
+        m = static_cast<months>(n);
 
+        // Выводим русские названия месяцев
         switch (m) {
-        case months::январь:
-            std::cout << "январь" << std::endl;
-            break;
-        case months::февраль:
-            std::cout << "февраль" << std::endl;
-            break;
-        case months::март:
-            std::cout << "март" << std::endl;
-            break;
-        case months::апрель:
-            std::cout << "апрель" << std::endl;
-            break;
-        case months::май:
-            std::cout << "май" << std::endl;
-            break;
-        case months::июнь:
-            std::cout << "июнь" << std::endl;
-            break;
-        case months::июль:
-            std::cout << "июль" << std::endl;
-            break;
-        case months::август:
-            std::cout << "август" << std::endl;
-            break;
-        case months::сентябрь:
-            std::cout << "сентябрь" << std::endl;
-            break;
-        case months::октябрь:
-            std::cout << "октябрь" << std::endl;
-            break;
-        case months::ноябрь:
-            std::cout << "ноябрь" << std::endl;
-            break;
-        case months::декабрь:
-            std::cout << "декабрь" << std::endl;
-            break;
-        default:
-            std::cout << "неправильный номер!" << std::endl;            
-            break;
+        case months::january:  std::cout << "январь" << std::endl;  break;
+        case months::february: std::cout << "февраль" << std::endl; break;
+        case months::march:    std::cout << "март" << std::endl;    break;
+        case months::april:    std::cout << "апрель" << std::endl;  break;
+        case months::may:      std::cout << "май" << std::endl;     break;
+        case months::june:     std::cout << "июнь" << std::endl;    break;
+        case months::july:     std::cout << "июль" << std::endl;    break;
+        case months::august:   std::cout << "август" << std::endl;  break;
+        case months::september:std::cout << "сентябрь" << std::endl;break;
+        case months::october:  std::cout << "октябрь" << std::endl; break;
+        case months::november: std::cout << "ноябрь" << std::endl;  break;
+        case months::december: std::cout << "декабрь" << std::endl; break;
+        default:               std::cout << "неправильный номер!" << std::endl; break;
         }
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
