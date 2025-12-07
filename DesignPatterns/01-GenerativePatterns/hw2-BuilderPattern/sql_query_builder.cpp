@@ -24,6 +24,15 @@ SqlSelectQueryBuilder& SqlSelectQueryBuilder::AddWhere(const std::string& column
     }
     return *this;
 }
+// добавить условие
+SqlSelectQueryBuilder& SqlSelectQueryBuilder::AddWhere(const std::map<std::string, std::string>& kv) noexcept {
+    for (const auto& pair : kv) {
+        if (!pair.first.empty() && !pair.second.empty()) {
+            pvWhere[pair.first] = pair.second;
+        }
+    }
+    return *this;
+};
 
 // Формируем запрос
 std::string SqlSelectQueryBuilder::BuildQuery() const {

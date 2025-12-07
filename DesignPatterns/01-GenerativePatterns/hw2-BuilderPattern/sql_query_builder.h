@@ -12,6 +12,8 @@ public:
     SqlSelectQueryBuilder& AddFrom(const std::string& table);
     // добавить условие
     SqlSelectQueryBuilder& AddWhere(const std::string& column, const std::string& value);
+    // добавить условие
+    SqlSelectQueryBuilder& AddWhere(const std::map<std::string, std::string>& kv) noexcept;
 
     // Формируем запрос
     std::string BuildQuery() const;
