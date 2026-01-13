@@ -1,10 +1,10 @@
-#include "IniFile.h"
+﻿#include "IniFile.h"
 #include <fstream>
 #include <sstream>
 #include <cctype>
 #include <algorithm>
 #include <filesystem>
-#include <charconv> // C++17+, но нормально в C++20
+#include <charconv> 
 
 // Конструктор
 IniFile::IniFile(const std::string& fileName) : m_fileName(fileName) {
