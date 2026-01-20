@@ -5,16 +5,13 @@
 
 class Indexer {
 public:
-    /// Обрабатывает HTML: удаляет теги, очищает текст, возвращает частоту слов.
+    // Удаляем теги, очищаем текст, подсчитываем частоту слов
     std::unordered_map<std::string, int> ProcessHtml(const std::string& html);
-
 private:
-    /// Удаляет HTML-теги с помощью простой логики (без регулярных выражений).
+    // Удаляем теги
     std::string RemoveHtmlTags(const std::string& html);
-
-    /// Очищает текст: оставляет только буквы и пробелы, приводит к нижнему регистру.
+    // Очищаем текст, оставляем только буквы и пробелы, приводим к нижнему регистру
     std::string CleanText(const std::string& text);
-
-    /// Разбивает текст на слова и фильтрует по длине (3–32 символа).
+    // Выбираем слова из текста и фильтруем по длине от 3 до 32 символов
     std::vector<std::string> ExtractWords(const std::string& cleanText);
 };

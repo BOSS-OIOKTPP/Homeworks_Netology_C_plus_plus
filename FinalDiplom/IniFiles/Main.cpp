@@ -5,8 +5,8 @@
 
 int main() {
     // Установка кодировки консоли Windows
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8); // 65001
 
     IniFile config("config.ini");
 
