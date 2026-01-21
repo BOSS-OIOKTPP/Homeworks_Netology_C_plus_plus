@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a5a68816-dfe5-4f71-b1bf-aac5e47dd6c6}</ProjectGuid>
-    <RootNamespace>DatabaseManager</RootNamespace>
+    <ProjectGuid>{9de8a4af-55c4-4f31-a2f1-d2953d670a5a}</ProjectGuid>
+    <RootNamespace>SpiderClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,15 +76,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\libpqxx-master\include;..\..\..\Libs\libpqxx-master\build\include;C:\Program Files\PostgreSQL\17\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\boost_1_90_0;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\..\Libs\libpqxx-master\build\src\Release\;C:\Program Files\PostgreSQL\17\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ws2_32.lib;pqxx.lib;libpq.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,15 +94,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\libpqxx-master\include;..\..\..\Libs\libpqxx-master\build\include;C:\Program Files\PostgreSQL\17\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\boost_1_90_0;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\..\Libs\libpqxx-master\build\src\Release\;C:\Program Files\PostgreSQL\17\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ws2_32.lib;pqxx.lib;libpq.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,15 +110,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\libpqxx-master\include;..\..\..\Libs\libpqxx-master\build\include;C:\Program Files\PostgreSQL\17\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\boost_1_90_0;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\..\Libs\libpqxx-master\build\src\Release\;C:\Program Files\PostgreSQL\17\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ws2_32.lib;pqxx.lib;libpq.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,25 +128,26 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\libpqxx-master\include;..\..\..\Libs\libpqxx-master\build\include;C:\Program Files\PostgreSQL\17\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\IniFiles;..\..\..\Libs\boost_1_90_0;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\..\Libs\libpqxx-master\build\src\Release\;C:\Program Files\PostgreSQL\17\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ws2_32.lib;pqxx.lib;libpq.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\IniFiles\IniFile.cpp" />
-    <ClCompile Include="DatabaseManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SpiderClient.cpp" />
+    <ClCompile Include="UrlUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\IniFiles\IniFile.h" />
-    <ClInclude Include="DatabaseManager.h" />
+    <ClInclude Include="SpiderClient.h" />
+    <ClInclude Include="UrlUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <windows.h>
-#include <pqxx/pqxx>
-#include "IniFile.h"
-#include "SpiderClient.h"
-#include "DatabaseManager.h"
+//#include <pqxx/pqxx>
+//#include "IniFile.h"
+//#include "SpiderClient.h"
+//#include "DatabaseManager.h"
 
 
 
@@ -12,7 +12,7 @@ int main() {
     SetConsoleCP(CP_UTF8);
     SetConsoleOutputCP(CP_UTF8); // 65001
 
-    // Читаем настройки
+    /*// Читаем настройки
     IniFile config("config.ini");
     // БД
     std::string host = config.readString("Database", "Host", "localhost");
@@ -72,7 +72,7 @@ int main() {
         std::cout << std::endl;
         return 1;
     }
-
+    */
 
     
     /*

@@ -48,7 +48,7 @@ int main() {
     DatabaseManager bd(connection_string);
     // Соединяемся с базой данных
     try {
-        bd.Сonnect();
+        bd.Connect();
     }
     catch (const std::exception& e) {
         std::cout << "ОШИБКА. Не удалось подключится к базе данных: " << e.what() << std::endl;
