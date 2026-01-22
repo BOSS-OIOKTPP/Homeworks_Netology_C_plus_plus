@@ -86,29 +86,21 @@ void DatabaseManager::SaveDocument(const std::string& url, const std::unordered_
     //if (!IsConnected()) 
     //    throw std::logic_error("Нет подключения к базе данных");
     
-
     pqxx::work tx(*_connection);
 
     // 1. Вставляем документ (игнорируем дубликаты)
-    pqxx::result doc_result = tx.exec_params(
-        "INSERT INTO documents (url) VALUES ($1) "
-        "ON CONFLICT (url) DO NOTHING RETURNING id",
-        url
-    );
+    pqxx::result doc_result = tx.exec(R"(INSERT INTO documents (url) VALUES ($1) ON CONFLICT (url) DO NOTHING RETURNING id)", pqxx::params{ url } );
 
+    // Определяем идентификатор документа
     int doc_id;
     if (!doc_result.empty()) {
         doc_id = doc_result[0][0].as<int>();
     }
     else {
-        // Документ уже существует — получаем его ID
-        pqxx::result existing = tx.exec_params(
-            "SELECT id FROM documents WHERE url = $1",
-            url
-        );
-        if (existing.empty()) {
-            throw std::runtime_error("Не удалось получить ID документа");
-        }
+        // Если документ уже существует, то ищем его ID в базе
+        pqxx::result existing = tx.exec(R"(SELECT id FROM documents WHERE url = $1)", pqxx::params{ url } );
+        if (existing.empty()) 
+            throw std::runtime_error("Не удалось получить ID документа");        
         doc_id = existing[0][0].as<int>();
     }
 
@@ -117,36 +109,23 @@ void DatabaseManager::SaveDocument(const std::string& url, const std::unordered_
         if (freq <= 0) continue; // Защита от некорректных данных
 
         // Вставляем слово (игнорируем дубликаты)
-        pqxx::result word_result = tx.exec_params(
-            "INSERT INTO words (word) VALUES ($1) "
-            "ON CONFLICT (word) DO NOTHING RETURNING id",
-            word
-        );
+        pqxx::result word_result = tx.exec(R"(INSERT INTO words (word) VALUES ($1) ON CONFLICT (word) DO NOTHING RETURNING id)", pqxx::params{ word } );
 
         int word_id;
         if (!word_result.empty()) {
             word_id = word_result[0][0].as<int>();
         }
         else {
-            // Слово уже существует — получаем его ID
-            pqxx::result existing = tx.exec_params(
-                "SELECT id FROM words WHERE word = $1",
-                word
-            );
-            if (existing.empty()) {
-                throw std::runtime_error("Не удалось получить ID слова");
-            }
+            // Если слово уже существует, то ищем его ID в базе
+            pqxx::result existing = tx.exec(R"(SELECT id FROM words WHERE word = $1)", pqxx::params{ word } );
+            if (existing.empty()) 
+                throw std::runtime_error("Не удалось получить ID слова");            
             word_id = existing[0][0].as<int>();
         }
 
-        // 3. Сохраняем связь с частотой
-        tx.exec_params(
-            "INSERT INTO doc_word (doc_id, word_id, freq) VALUES ($1, $2, $3) "
-            "ON CONFLICT (doc_id, word_id) DO UPDATE SET freq = $3",
-            doc_id, word_id, freq
-        );
+        // 3. Сохраняем связь с частотой        
+        tx.exec(R"(INSERT INTO doc_word (doc_id, word_id, freq)  VALUES ($1, $2, $3) ON CONFLICT (doc_id, word_id) DO UPDATE SET freq = $3)", pqxx::params{ doc_id, word_id, freq });
     }
 
     tx.commit();
-    //std::cout << "✅ Сохранено " << word_freq.size() << " слов для: " << url << "\n";
 }

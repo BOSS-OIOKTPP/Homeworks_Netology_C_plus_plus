@@ -36,6 +36,9 @@
     <ClCompile Include="..\LinkExtractor\LinkExtractor.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\SpiderClient\UrlUtils.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpiderEngine.h">
@@ -54,6 +57,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="..\LinkExtractor\LinkExtractor.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SpiderClient\UrlUtils.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

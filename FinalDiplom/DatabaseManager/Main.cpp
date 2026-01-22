@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <windows.h>
-#include <pqxx/pqxx>
 #include "IniFile.h"
 #include "DatabaseManager.h"
 

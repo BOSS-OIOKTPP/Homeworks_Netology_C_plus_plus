@@ -27,6 +27,18 @@
     <ClCompile Include="..\DatabaseManager\DatabaseManager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\LinkExtractor\LinkExtractor.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SpiderClient\SpiderClient.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SpiderEngine\SpiderEngine.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SpiderClient\UrlUtils.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\IniFiles\IniFile.h">
@@ -39,6 +51,18 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="..\DatabaseManager\DatabaseManager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LinkExtractor\LinkExtractor.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SpiderClient\SpiderClient.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SpiderEngine\SpiderEngine.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SpiderClient\UrlUtils.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

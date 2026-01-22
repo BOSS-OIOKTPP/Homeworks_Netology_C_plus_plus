@@ -33,8 +33,9 @@ void SpiderEngine::Crawl(const std::string& url, int depth) {
         // 2. Индексируем текст
         auto wordFreq = _indexer.ProcessHtml(html);
 
-        // 3. Сохраняем в БД (заглушка — реализуем позже)
-        // TODO: db_.SaveDocument(url, wordFreq);
+        // 3. Сохраняем в БД 
+        if (!wordFreq.empty()) 
+            _db.SaveDocument(url, wordFreq);        
 
         // 4. Если не последняя глубина — ищем ссылки
         if (depth < _max_depth) {
@@ -43,7 +44,9 @@ void SpiderEngine::Crawl(const std::string& url, int depth) {
                 Crawl(link, depth + 1);
             }
         }
-
+    }
+    catch (const pqxx::sql_error& e) {
+        std::cerr << "Ошибка БД при обработке " << url << ": " << e.what() << "\n";
     }
     catch (const std::exception& e) {
         std::cerr << "Ошибка при обработке " << url << ": " << e.what() << "\n";

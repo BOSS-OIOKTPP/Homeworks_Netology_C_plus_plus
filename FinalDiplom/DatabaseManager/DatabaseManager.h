@@ -1,7 +1,9 @@
 ﻿#pragma once
 
-#include <pqxx/pqxx>
 #include <string>
+#include <unordered_map>
+#include <memory>
+#include <pqxx/pqxx>
 
 class DatabaseManager
 {
@@ -30,4 +32,6 @@ private:
     std::string _connection_string;
     std::unique_ptr<pqxx::connection> _connection;
 };
+
+
 
