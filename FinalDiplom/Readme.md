@@ -4,6 +4,7 @@
 
 ## Структура проекта
 
+```text
 FinalDiplom/
 ├── Source/                     # Исходный код
 │   ├── DatabaseManager/        # Работа с PostgreSQL
@@ -14,7 +15,7 @@ FinalDiplom/
 │   ├── SpiderEngine/           # Рекурсивный обход
 │   └── spider/                 # Основной проект Visual Studio (с Main.cpp и config.ini)
 └── Distributiv/                # Готовый к запуску дистрибутив
-
+```
 
 ## Установка зависимостей
 
