@@ -1,0 +1,7 @@
+-- Создали пользователя
+CREATE USER spider_user WITH PASSWORD 'secure_password';
+-- Даём права на саму базу данных
+GRANT ALL PRIVILEGES ON DATABASE spider_db TO spider_user;
+-- Даём права пользователю на схему public
+GRANT ALL ON SCHEMA public TO spider_user;
+
