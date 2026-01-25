@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{796a7e46-b495-4afa-a555-0d04533d489b}</ProjectGuid>
-    <RootNamespace>spider</RootNamespace>
+    <ProjectGuid>{dcf890a2-e49a-4864-99ce-20a5feb2516e}</ProjectGuid>
+    <RootNamespace>searchserver</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -77,19 +77,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\IniFiles;..\SpiderClient;..\SpiderEngine;..\LinkExtractor;..\Indexer;..\DatabaseManager;</AdditionalIncludeDirectories>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>\utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\IniFiles;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>call deploy.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -100,19 +94,13 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\IniFiles;..\SpiderClient;..\SpiderEngine;..\LinkExtractor;..\Indexer;..\DatabaseManager;</AdditionalIncludeDirectories>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>\utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\IniFiles;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>call deploy.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -121,19 +109,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\IniFiles;..\SpiderClient;..\SpiderEngine;..\LinkExtractor;..\Indexer;..\DatabaseManager;</AdditionalIncludeDirectories>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>\utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\IniFiles;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>call deploy.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,38 +126,22 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\IniFiles;..\SpiderClient;..\SpiderEngine;..\LinkExtractor;..\Indexer;..\DatabaseManager;</AdditionalIncludeDirectories>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>\utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\IniFiles;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>call deploy.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\DatabaseManager\DatabaseManager.cpp" />
-    <ClCompile Include="..\Indexer\Indexer.cpp" />
     <ClCompile Include="..\IniFiles\IniFile.cpp" />
-    <ClCompile Include="..\LinkExtractor\LinkExtractor.cpp" />
-    <ClCompile Include="..\SpiderClient\SpiderClient.cpp" />
-    <ClCompile Include="..\SpiderClient\UrlUtils.cpp" />
-    <ClCompile Include="..\SpiderEngine\SpiderEngine.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SearchServer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\DatabaseManager\DatabaseManager.h" />
-    <ClInclude Include="..\Indexer\Indexer.h" />
     <ClInclude Include="..\IniFiles\IniFile.h" />
-    <ClInclude Include="..\LinkExtractor\LinkExtractor.h" />
-    <ClInclude Include="..\SpiderClient\SpiderClient.h" />
-    <ClInclude Include="..\SpiderClient\UrlUtils.h" />
-    <ClInclude Include="..\SpiderEngine\SpiderEngine.h" />
+    <ClInclude Include="SearchServer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

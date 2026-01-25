@@ -44,9 +44,6 @@
     <ClInclude Include="..\IniFiles\IniFile.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="SpiderClient.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="..\Indexer\Indexer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
