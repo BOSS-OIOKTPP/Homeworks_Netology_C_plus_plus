@@ -1,5 +1,6 @@
 ﻿#include "DatabaseManager.h"
 
+
 // Конструктор
 DatabaseManager::DatabaseManager(const std::string& connection_string) : _connection_string(connection_string) {}
 
@@ -129,3 +130,38 @@ void DatabaseManager::SaveDocument(const std::string& url, const std::unordered_
 
     tx.commit();
 }
+
+// Поиск по словам
+std::vector<std::pair<std::string, int>> DatabaseManager::searchWords(const std::vector<std::string>& words) {
+    if (words.empty()) {
+        return {};
+    }
+    
+    pqxx::work tx(*_connection);
+
+    // Формируем список слов для SQL IN
+    std::ostringstream wordList;
+    for (size_t i = 0; i < words.size(); ++i) {
+        if (i > 0) wordList << ",";
+        // Экранируем кавычки (pqxx::quote не работает с массивами, поэтому вручную)
+        wordList << "'" << tx.esc(words[i]) << "'";
+    }
+
+    std::ostringstream sql;
+    sql << "SELECT v.url, SUM(w.frequency) AS total_freq "
+        << "FROM visited_urls v "
+        << "JOIN word_frequencies w ON w.url_id = v.id "
+        << "WHERE w.word IN (" << wordList.str() << ") "
+        << "GROUP BY v.id, v.url "
+        << "HAVING COUNT(DISTINCT w.word) = " << words.size() << " "
+        << "ORDER BY total_freq DESC "
+        << "LIMIT 10";
+
+    pqxx::result res = tx.exec(sql.str());
+    std::vector<std::pair<std::string, int>> results;
+    for (const auto& row : res) 
+        results.emplace_back(row["url"].c_str(), row["total_freq"].as<int>());
+    
+    return results;
+}
+

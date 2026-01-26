@@ -28,6 +28,8 @@ public:
     // Сохраняем документ и частоту слов в БД
     void SaveDocument(const std::string& url, const std::unordered_map<std::string, int>& word_freq);
 
+    // Поиск по словам
+    std::vector<std::pair<std::string, int>> searchWords(const std::vector<std::string>& words);
 private:
     std::string _connection_string;
     std::unique_ptr<pqxx::connection> _connection;
