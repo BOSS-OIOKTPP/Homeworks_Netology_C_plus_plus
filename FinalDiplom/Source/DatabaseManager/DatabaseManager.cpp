@@ -127,41 +127,37 @@ void DatabaseManager::SaveDocument(const std::string& url, const std::unordered_
         // 3. Сохраняем связь с частотой        
         tx.exec(R"(INSERT INTO doc_word (doc_id, word_id, freq)  VALUES ($1, $2, $3) ON CONFLICT (doc_id, word_id) DO UPDATE SET freq = $3)", pqxx::params{ doc_id, word_id, freq });
     }
-
     tx.commit();
 }
 
 // Поиск по словам
 std::vector<std::pair<std::string, int>> DatabaseManager::searchWords(const std::vector<std::string>& words) {
-    if (words.empty()) {
-        return {};
-    }
-    
+    if (words.empty()) return {};
+
     pqxx::work tx(*_connection);
 
-    // Формируем список слов для SQL IN
+    // Формируем список слов для условия IN
     std::ostringstream wordList;
     for (size_t i = 0; i < words.size(); ++i) {
         if (i > 0) wordList << ",";
-        // Экранируем кавычки (pqxx::quote не работает с массивами, поэтому вручную)
         wordList << "'" << tx.esc(words[i]) << "'";
     }
 
     std::ostringstream sql;
-    sql << "SELECT v.url, SUM(w.frequency) AS total_freq "
-        << "FROM visited_urls v "
-        << "JOIN word_frequencies w ON w.url_id = v.id "
+    sql << "SELECT d.url, SUM(dw.freq) AS total_freq "
+        << "FROM documents d "
+        << "JOIN doc_word dw ON dw.doc_id = d.id "
+        << "JOIN words w ON w.id = dw.word_id "
         << "WHERE w.word IN (" << wordList.str() << ") "
-        << "GROUP BY v.id, v.url "
+        << "GROUP BY d.id, d.url "
         << "HAVING COUNT(DISTINCT w.word) = " << words.size() << " "
         << "ORDER BY total_freq DESC "
         << "LIMIT 10";
 
     pqxx::result res = tx.exec(sql.str());
     std::vector<std::pair<std::string, int>> results;
-    for (const auto& row : res) 
+    for (const auto& row : res) {
         results.emplace_back(row["url"].c_str(), row["total_freq"].as<int>());
-    
+    }
     return results;
 }
-

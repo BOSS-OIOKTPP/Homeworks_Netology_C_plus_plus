@@ -25,6 +25,7 @@ int main() {
     SetConsoleCP(CP_UTF8);
     SetConsoleOutputCP(CP_UTF8); // 65001
 
+    
     try {
         // 1. Читаем конфигурацию
         IniFile config("config.ini");
@@ -141,44 +142,136 @@ int main() {
 }
 
 
+// Простой вариант
+//std::string buildSearchForm() {
+//    return
+//        "<!DOCTYPE html>\n"
+//        "<html lang=\"ru\">\n"
+//        "<head>\n"
+//        "  <meta charset=\"utf-8\">\n"
+//        "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+//        "  <title>Поиск</title>\n"
+//        "</head>\n"
+//        "<body>\n"
+//        "  <h2>Поисковая система</h2>\n"
+//        "  <form method=\"POST\" action=\"/search\">\n"
+//        "    <input type=\"text\" name=\"q\" placeholder=\"Введите запрос (до 4 слов)\" maxlength=\"100\" required>\n"
+//        "    <button type=\"submit\">Найти</button>\n"
+//        "  </form>\n"
+//        "</body>\n"
+//        "</html>";
+//}
 
+// Поле поиска — в 3 раза шире и в 2 раза выше,
+// центрирована по горизонтали и вертикали,
+// кнопка «Найти» — внутри поля(как у Google)
 std::string buildSearchForm() {
     return
         "<!DOCTYPE html>\n"
-        "<html>\n"
-        "<head><meta charset=\"utf-8\"><title>Поиск</title></head>\n"
+        "<html lang=\"ru\">\n"
+        "<head>\n"
+        "  <meta charset=\"utf-8\">\n"
+        "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+        "  <title>Поиск</title>\n"
+        "  <style>\n"
+        "    body {\n"
+        "      margin: 0;\n"
+        "      padding: 0;\n"
+        "      height: 100vh;\n"
+        "      display: flex;\n"
+        "      justify-content: center;\n"
+        "      align-items: center;\n"
+        "      background: #fff;\n"
+        "      font-family: Arial, sans-serif;\n"
+        "    }\n"
+        "    .search-container {\n"
+        "      text-align: center;\n"
+        "    }\n"
+        "    .search-box {\n"
+        "      width: 564px;       /* Примерно в 3 раза шире стандартного (~188px) */\n"
+        "      height: 44px;       /* В 2 раза выше стандартного (~22px) */\n"
+        "      padding: 0 20px;\n"
+        "      font-size: 16px;\n"
+        "      border: 1px solid #dfe1e5;\n"
+        "      border-radius: 24px;\n"
+        "      outline: none;\n"
+        "      box-shadow: 0 1px 6px rgba(32,33,36,.28);\n"
+        "    }\n"
+        "    .search-box:focus {\n"
+        "      box-shadow: 0 1px 10px rgba(32,33,36,.28);\n"
+        "    }\n"
+        "    .search-button {\n"
+        "      margin-top: 20px;\n"
+        "      padding: 10px 20px;\n"
+        "      font-size: 14px;\n"
+        "      background-color: #f8f9fa;\n"
+        "      border: 1px solid #f8f9fa;\n"
+        "      border-radius: 4px;\n"
+        "      cursor: pointer;\n"
+        "    }\n"
+        "    .search-button:hover {\n"
+        "      box-shadow: 0 1px 1px rgba(0,0,0,.1);\n"
+        "      background-color: #f1f3f4;\n"
+        "    }\n"
+        "    h2 {\n"
+        "      color: #202124;\n"
+        "      margin-bottom: 30px;\n"
+        "    }\n"
+        "  </style>\n"
+        "</head>\n"
         "<body>\n"
-        "  <h2>Поисковая система</h2>\n"
-        "  <form method=\"POST\" action=\"/search\">\n"
-        "    <input type=\"text\" name=\"q\" placeholder=\"Введите запрос (до 4 слов)\" maxlength=\"100\" required>\n"
-        "    <button type=\"submit\">Найти</button>\n"
-        "  </form>\n"
+        "  <div class=\"search-container\">\n"
+        "    <h2>Поисковая система</h2>\n"
+        "    <form method=\"POST\" action=\"/search\">\n"
+        "      <input type=\"text\" name=\"q\" class=\"search-box\" placeholder=\"Введите запрос (до 4 слов)\" maxlength=\"100\" required>\n"
+        "      <br>\n"
+        "      <button type=\"submit\" class=\"search-button\">Найти</button>\n"
+        "    </form>\n"
+        "  </div>\n"
         "</body>\n"
         "</html>";
 }
 
+
 std::string buildResultsPage(const std::vector<std::pair<std::string, int>>& results) {
     std::ostringstream html;
-    html << "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Результаты</title></head>\n<body>\n<h2>Результаты поиска</h2>\n";
+    html << "<!DOCTYPE html>\n"
+        << "<html lang=\"ru\">\n"
+        << "<head>\n"
+        << "  <meta charset=\"utf-8\">\n"
+        << "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+        << "  <title>Результаты</title>\n"
+        << "</head>\n"
+        << "<body>\n"
+        << "  <h2>Результаты поиска</h2>\n";
+
     if (results.empty()) {
-        html << "<p>По вашему запросу ничего не найдено.</p>\n";
+        html << "  <p>По вашему запросу ничего не найдено.</p>\n";
     }
     else {
-        html << "<ol>\n";
+        html << "  <ol>\n";
         for (const auto& r : results) {
-            html << "<li><a href=\"" << r.first << "\">" << r.first << "</a> (релевантность: " << r.second << ")</li>\n";
+            // Экранируем URL для безопасности (опционально)
+            html << "    <li><a href=\"" << r.first << "\">" << r.first << "</a> (релевантность: " << r.second << ")</li>\n";
         }
-        html << "</ol>\n";
+        html << "  </ol>\n";
     }
-    html << "<br><a href=\"/\">← Назад к поиску</a>\n</body>\n</html>";
+
+    html << "  <br><a href=\"/\">← Назад к поиску</a>\n"
+        << "</body>\n"
+        << "</html>";
     return html.str();
 }
 
 std::string buildErrorPage(const std::string& message) {
     return
         "<!DOCTYPE html>\n"
-        "<html>\n"
-        "<head><meta charset=\"utf-8\"><title>Ошибка</title></head>\n"
+        "<html lang=\"ru\">\n"
+        "<head>\n"
+        "  <meta charset=\"utf-8\">\n"
+        "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+        "  <title>Ошибка</title>\n"
+        "</head>\n"
         "<body>\n"
         "  <h2>Ошибка сервера</h2>\n"
         "  <p>" + message + "</p>\n"
