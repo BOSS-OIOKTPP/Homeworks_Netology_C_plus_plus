@@ -2,6 +2,7 @@
 #define CONNECTDB_H
 
 #include <QMainWindow>
+#include <QAbstractButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ConnectDB; }
@@ -14,6 +15,9 @@ class ConnectDB : public QMainWindow
 public:
     ConnectDB(QWidget *parent = nullptr);
     ~ConnectDB();
+
+private slots:
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
     Ui::ConnectDB *ui;
