@@ -1,9 +1,0 @@
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/widgets.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/edit_cache.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/list_install_components.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/install.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/install/local.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/install/strip.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/widgets_autogen_timestamp_deps.dir
-C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/04-Widgets/build-widgets-Desktop-Debug/CMakeFiles/widgets_autogen.dir
