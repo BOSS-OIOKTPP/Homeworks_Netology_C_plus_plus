@@ -46,9 +46,6 @@ void Stopwatch::reset()
     _lastLapTime = 0;     // очищаем время последнего круга
     _lapCount = 0;        // очищаем количество кругов
     _lapTimes.clear();    // очищаем список с временами кругов
-
-    //emit timeUpdated(0);  // запускаем сигнал, чтобы обновилась время на форме
-    emit resetOccurred(); // запускаем сигнал, чтобы обновить форму
 }
 
 // Сохраняем измерение при нажатии на кнопку Круга
@@ -61,9 +58,7 @@ void Stopwatch::lap()
     _lastLapTime = currentTotal;                                    // Запомнили время завершения измерения круга
 
     _lapCount++;                            // увеличиваем счетчик кругов
-    _lapTimes.append(lapTime);              // добавляем время измерения в список
-
-    emit lapRecorded(_lapCount, lapTime);   // запускаем сигнал для вывода измерения в textBrowser
+    _lapTimes.append(lapTime);              // добавляем время измерения в список   
 }
 
 
@@ -92,7 +87,7 @@ int Stopwatch::getLapCount() const
 }
 
 // Список времени кругов
-QList<qint64> Stopwatch::getLapTimes() const
+const QList<qint64>& Stopwatch::getLapTimes() const
 {
     return _lapTimes;
 }

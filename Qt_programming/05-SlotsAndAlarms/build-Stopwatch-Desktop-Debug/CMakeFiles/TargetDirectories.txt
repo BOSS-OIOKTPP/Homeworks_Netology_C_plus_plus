@@ -1,8 +1,0 @@
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/Stopwatch.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/edit_cache.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/list_install_components.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/install.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/install/local.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/install/strip.dir
-D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/05-SlotsAndAlarms/build-Stopwatch-Desktop-Debug/CMakeFiles/Stopwatch_autogen.dir

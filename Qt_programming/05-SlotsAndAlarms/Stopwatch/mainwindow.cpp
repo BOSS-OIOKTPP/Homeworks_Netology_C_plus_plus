@@ -10,11 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Создаём экземпляр секундомера
     _stopwatch = new Stopwatch(this);
 
-    // Подключаем сигналы секундомера к слотам главного окна
-    connect(_stopwatch, &Stopwatch::timeUpdated, this, &MainWindow::updateTimeDisplay);
-    connect(_stopwatch, &Stopwatch::lapRecorded, this, &MainWindow::addLapToBrowser);
-    connect(_stopwatch, &Stopwatch::resetOccurred, this, &MainWindow::onResetOccurred);
-
+    // Подключаем сигнал секундомера к слоту главного окна
+    connect(_stopwatch, &Stopwatch::timeUpdated, this, &MainWindow::updateTimeDisplay);    
 
     // Кнопка Круг изначально неактивна
     ui->lapButton->setEnabled(false);
@@ -44,33 +41,32 @@ void MainWindow::on_startStopButton_clicked()
 void MainWindow::on_lapButton_clicked()
 {
     _stopwatch->lap();
+
+    int lapNumber = _stopwatch->getLapCount();     // Количество кругов
+    const auto& laps = _stopwatch->getLapTimes();  // Ссылка на список
+    if (!laps.isEmpty()) {
+        qint64 lapTimeMs = laps.last();            // Прочитали время в миллисекундах
+        double seconds = lapTimeMs / 1000.0;       // Перевели в секунды
+        QString lapText = QString("Круг %1, время: %2 сек")
+                             .arg(lapNumber)
+                             .arg(seconds, 0, 'f', 1);
+        ui->lapsBrowser->append(lapText);
+    }
 }
 
 void MainWindow::on_resetButton_clicked()
 {
     _stopwatch->reset();
+
+    ui->timeLabel->setText("0.0 сек");
+    ui->lapsBrowser->clear();
+    ui->startStopButton->setText("Старт");
+    ui->lapButton->setEnabled(false);
 }
 
 void MainWindow::updateTimeDisplay(qint64 elapsedMs)
 {
     double seconds = elapsedMs / 1000.0;
     ui->timeLabel->setText(QString("%1 сек").arg(seconds, 0, 'f', 1));
-}
-
-void MainWindow::addLapToBrowser(int lapNumber, qint64 lapTimeMs)
-{
-    double seconds = lapTimeMs / 1000.0;
-    QString lapText = QString("Круг %1, время: %2 сек")
-                         .arg(lapNumber)
-                         .arg(seconds, 0, 'f', 1);
-    ui->lapsBrowser->append(lapText);
-}
-
-void MainWindow::onResetOccurred()
-{
-    ui->timeLabel->setText("0.0 сек");
-    ui->lapsBrowser->clear();
-    ui->startStopButton->setText("Старт");
-    ui->lapButton->setEnabled(false);
 }
 

@@ -14,11 +14,7 @@ class MainWindow : public QMainWindow
 
 private slots:
 
-    void onResetOccurred();
-    void updateTimeDisplay(qint64 elapsedMs);
-    void addLapToBrowser(int lapNumber, qint64 lapTimeMs);
-
-
+    void updateTimeDisplay(qint64 elapsedMs);    
     void on_startStopButton_clicked();
     void on_lapButton_clicked();
     void on_resetButton_clicked();

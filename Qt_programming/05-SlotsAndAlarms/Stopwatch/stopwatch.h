@@ -13,39 +13,25 @@ class Stopwatch : public QObject
 public:
     explicit Stopwatch(QObject *parent = nullptr);
 
-
     // Основные методы управления
     void start();   // Нажали кнопку Старт/Стоп
     void stop();    // Нажали кнопку Старт/Стоп
     void reset();   // Нажали кнопку Очистить
     void lap();     // Нажали кнопку Круг
 
-
     // Вычисляем интервал
     qint64 getElapsedMs() const;
     // Количество кругов
     int getLapCount() const;
     // Список времени кругов
-    QList<qint64> getLapTimes() const;
+    const QList<qint64>& getLapTimes() const;
     // Определяем, что таймер запущен
     bool isRunning() const;
 
 signals:
-    // Сигналы, которые отправляет Stopwatch главному окну
-
-    // 1. Сигнал генерируется таймером каждые 100мс, пока запущен секундомер
-    //    Главное окно подключается к этому сигналу, чтобы обновлять label стекущим временем
-    void timeUpdated(qint64 elapsedMs);
-
-    // 2. Сигнал генерируется при нажатии кнопки Круг.
-    //    Главное окно подключается к этому сигналу и добавляет запись о Круге в textBrowser
-    //    lapNumber - номер круга, lapTimeMs - интервал времени круга в мс
-    void lapRecorded(int lapNumber, qint64 lapTimeMs);
-
-    // 3. Сигнал генерируется при нажатии кнопки Очистить в методе reset().
-    //    Главное окно подключается к этому сигналу и устанавливает время в 0.0 сек, очищает текстовый браузер,
-    //    устанавливает кнопку в состояние Старт и запрещает кнопку Круг
-    void resetOccurred();
+    //   Сигнал генерируется таймером каждые 100мс, пока запущен секундомер
+    //   Главное окно подключается к этому сигналу, чтобы обновлять label стекущим временем
+    void timeUpdated(qint64 elapsedMs);   
 
 private slots:
 
@@ -56,7 +42,6 @@ private slots:
     // Запускает сигнал timeUpdated() с новым значением времени
     void updateTime();
 
-
 private:
     QTimer *_timer;              // Таймер для обновления, интервал 100 мс
     QElapsedTimer _elapsedTimer; // Для точного замера интервала
@@ -65,8 +50,6 @@ private:
     int _lapCount;               // Счётчик кругов
     QList<qint64> _lapTimes;     // Список времени кругов
     bool _isRunning;             // Запущен счетчик или нет
-
-
 };
 
 #endif // STOPWATCH_H
