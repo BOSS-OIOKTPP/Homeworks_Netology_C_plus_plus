@@ -8,7 +8,8 @@
 
 #define BIND_PORT 12345
 
-// Маркер для текстового сообщения. Теперь время в тексте не спутается с пакетом времени
+// Маркер для текстового сообщения.
+// Теперь время в тексте не спутается с пакетом времени
 inline constexpr char kUserTextDatagramMarker = '\x01';
 
 class UDPworker : public QObject

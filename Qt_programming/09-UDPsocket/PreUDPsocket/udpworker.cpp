@@ -36,14 +36,14 @@ void UDPworker::ReadDatagram(QNetworkDatagram datagram)
     if (data.isEmpty())
         return;
 
-    // Если текст с маркером.
-    // Иначе это пакет времени (как в прекоде, только QDataStream).
+    // Если текст с маркером, то обрабатываем
     if (data.at(0) == kUserTextDatagramMarker) {
         const QByteArray textPayload = data.mid(1);
         emit sig_sendUserMessageToGUI(datagram.senderAddress().toString(), textPayload.size());
         return;
     }
 
+    // Иначе это пакет времени
     QDataStream inStr(&data, QIODevice::ReadOnly);
     QDateTime dateTime;
     inStr >> dateTime;
