@@ -8,6 +8,9 @@
 
 #define BIND_PORT 12345
 
+// Маркер для текстового сообщения. Теперь время в тексте не спутается с пакетом времени
+inline constexpr char kUserTextDatagramMarker = '\x01';
+
 class UDPworker : public QObject
 {
     Q_OBJECT
@@ -23,6 +26,7 @@ private slots:
 
 private:
     QUdpSocket* serviceUdpSocket;
+    QUdpSocket* sendUdpSocket;
 
 signals:
     void sig_sendTimeToGUI(QDateTime data);

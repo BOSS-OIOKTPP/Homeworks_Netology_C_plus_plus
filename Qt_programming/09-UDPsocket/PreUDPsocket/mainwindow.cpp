@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 
         QByteArray dataToSend;
         QDataStream outStr(&dataToSend, QIODevice::WriteOnly);
-
         outStr << dateTime;
 
         udpWorker->SendDatagram(dataToSend);
@@ -61,9 +60,12 @@ void MainWindow::on_pb_stop_clicked()
 
 void MainWindow::on_pb_sendDatagram_clicked()
 {
-    QByteArray data = ui->le_message->text().toUtf8();
-    if (!data.isEmpty()) {
-        udpWorker->SendDatagram(data);
+    const QByteArray text = ui->le_message->text().toUtf8();
+    if (!text.isEmpty()) {
+        QByteArray packet;
+        packet.append(kUserTextDatagramMarker);
+        packet.append(text);
+        udpWorker->SendDatagram(packet);
     }
 }
 

@@ -16,6 +16,7 @@ void UDPworker::InitSocket()
 {
 
     serviceUdpSocket = new QUdpSocket(this);
+    sendUdpSocket = new QUdpSocket(this);
     /*
      * Соединяем присваиваем адрес и порт серверу и соединяем функцию
      * обраотчик принятых пакетов с сокетом
@@ -32,18 +33,22 @@ void UDPworker::InitSocket()
 void UDPworker::ReadDatagram(QNetworkDatagram datagram)
 {
     QByteArray data = datagram.data();
-    qint64 size = data.size();
-    QString senderAddress = datagram.senderAddress().toString();
+    if (data.isEmpty())
+        return;
+
+    // Если текст с маркером.
+    // Иначе это пакет времени (как в прекоде, только QDataStream).
+    if (data.at(0) == kUserTextDatagramMarker) {
+        const QByteArray textPayload = data.mid(1);
+        emit sig_sendUserMessageToGUI(datagram.senderAddress().toString(), textPayload.size());
+        return;
+    }
 
     QDataStream inStr(&data, QIODevice::ReadOnly);
     QDateTime dateTime;
     inStr >> dateTime;
-
-    if (inStr.status() == QDataStream::Ok && dateTime.isValid()) {
+    if (inStr.status() == QDataStream::Ok && dateTime.isValid())
         emit sig_sendTimeToGUI(dateTime);
-    } else {
-        emit sig_sendUserMessageToGUI(senderAddress, size);
-    }
 }
 /*!
  * @brief Метод осуществляет опередачу датаграммы
@@ -51,9 +56,10 @@ void UDPworker::ReadDatagram(QNetworkDatagram datagram)
 void UDPworker::SendDatagram(QByteArray data)
 {
     /*
-     *  Отправляем данные на localhost и задефайненный порт
+     * Отправка с отдельного сокета: при отправке с того же сокета, что слушает порт,
+     * на некоторых ОС (в т.ч. Windows) датаграмма может прийти в readyRead дважды.
      */
-    serviceUdpSocket->writeDatagram(data, QHostAddress::LocalHost, BIND_PORT);
+    sendUdpSocket->writeDatagram(data, QHostAddress::LocalHost, BIND_PORT);
 }
 
 /*!
