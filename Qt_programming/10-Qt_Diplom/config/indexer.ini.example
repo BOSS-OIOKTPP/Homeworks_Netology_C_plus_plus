@@ -1,0 +1,13 @@
+; Скопируйте рядом с indexer.exe как indexer.ini (CMake при сборке копирует этот пример автоматически)
+; Ключи [Database] совместимы с проектом FinalDiplom (Host, Name, …) и с нижним регистром (host, dbname, …)
+
+[Paths]
+roots = C:/temp/index_test
+extensions = txt,md,ini,csv
+
+[Database]
+Host = localhost
+Port = 5432
+Name = search_diplom
+User = postgres
+Password = your_password

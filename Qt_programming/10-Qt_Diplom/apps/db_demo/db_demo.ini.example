@@ -1,0 +1,8 @@
+; Скопируйте как db_demo.ini и укажите доступ к PostgreSQL (формат как в FinalDiplom)
+
+[Database]
+Host = localhost
+Port = 5432
+Name = search_diplom
+User = postgres
+Password = your_password
