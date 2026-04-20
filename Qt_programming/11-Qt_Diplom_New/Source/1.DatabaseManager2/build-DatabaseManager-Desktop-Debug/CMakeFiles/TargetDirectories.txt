@@ -1,0 +1,9 @@
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/DatabaseManager.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/edit_cache.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/list_install_components.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/install.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/install/local.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/install/strip.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/DatabaseManager_autogen_timestamp_deps.dir
+C:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/11-Qt_Diplom_New/Source/1.DatabaseManager2/build-DatabaseManager-Desktop-Debug/CMakeFiles/DatabaseManager_autogen.dir

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\build-vs\DatabaseManagerQtConsole_autogen\mocs_compilation_Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\DatabaseManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\build-vs\DatabaseManagerQtConsole_autogen\mocs_compilation_Release.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\build-vs\DatabaseManagerQtConsole_autogen\mocs_compilation_MinSizeRel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\build-vs\DatabaseManagerQtConsole_autogen\mocs_compilation_RelWithDebInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\DatabaseManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\11-Qt_Diplom_New\Source\01_DatabaseManagerQtConsole\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3524CB8E-5A7D-3D96-B943-C5E60D9D0371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{48E0333C-003E-36B0-8261-083FC8E888F6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
