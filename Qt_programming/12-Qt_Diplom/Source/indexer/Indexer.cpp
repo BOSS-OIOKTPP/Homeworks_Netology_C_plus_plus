@@ -57,9 +57,9 @@ bool Indexer::loadSettings(QString *errorMessage)
     m_rootPaths.clear();
     m_extensions.clear();
 
-    // Поддержка нескольких корневых каталогов:
-    // roots="c:/Dir1;c:/Dir2" или roots="c:/Dir1,c:/Dir2".
-    const QStringList roots = rootsRaw.split(QRegularExpression(QStringLiteral("[;,]")), Qt::SkipEmptyParts);
+    // Поддержка нескольких корневых каталогов только через запятую:
+    // roots="c:/Dir1,c:/Dir2".
+    const QStringList roots = rootsRaw.split(',', Qt::SkipEmptyParts);
     for (const QString &root : roots) {
         const QString normalized = QDir::fromNativeSeparators(root.trimmed());
         if (!normalized.isEmpty()) {
@@ -172,6 +172,7 @@ bool Indexer::indexSingleFile(const QString &filePath,
                               int *uniqueWordsCount,
                               QString *errorMessage)
 {
+    // Проверяем, что вызывающий код передал все счетчики статистики.
     if (savedWordsCount == nullptr || totalWordsCount == nullptr || uniqueWordsCount == nullptr) {
         if (errorMessage != nullptr) {
             *errorMessage = QStringLiteral("Внутренняя ошибка: не переданы указатели статистики файла.");
@@ -179,6 +180,7 @@ bool Indexer::indexSingleFile(const QString &filePath,
         return false;
     }
 
+    // Открываем файл и читаем его целиком в память.
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         if (errorMessage != nullptr) {
@@ -190,15 +192,21 @@ bool Indexer::indexSingleFile(const QString &filePath,
     const QByteArray bytes = file.readAll();
     file.close();
 
+    // Пробуем декодировать как UTF-8, а при ошибке используем локальную кодировку ОС.
     QStringDecoder decoder(QStringDecoder::Utf8);
     QString text = decoder.decode(bytes);
     if (decoder.hasError()) {
         text = QString::fromLocal8Bit(bytes);
     }
 
+    // Разбиваем текст на токены: оставляем только буквы/цифры, остальное считаем разделителями.
     const QRegularExpression separatorPattern(QStringLiteral("[^\\p{L}\\p{N}]+"));
     const QStringList tokens = text.split(separatorPattern, Qt::SkipEmptyParts);
 
+    // Считаем частоту слов:
+    // - приводим к нижнему регистру;
+    // - отбрасываем слова длиной <= 3 и > 32;
+    // - накапливаем количество.
     QHash<QString, int> frequencies;
     *totalWordsCount = 0;
     for (const QString &token : tokens) {
@@ -212,6 +220,8 @@ bool Indexer::indexSingleFile(const QString &filePath,
 
     *uniqueWordsCount = frequencies.size();
 
+    // Сохраняем в БД итоговые частоты по документу.
+    // DbManager сам обеспечивает корректную переиндексацию документа.
     QString dbError;
     if (!m_dbManager->saveDocumentWordFrequencies(filePath, frequencies, &dbError)) {
         if (errorMessage != nullptr) {
@@ -220,6 +230,8 @@ bool Indexer::indexSingleFile(const QString &filePath,
         }
         return false;
     }
+
+    // Количество "сохраненных слов" = число уникальных слов, попавших в индекс.
     *savedWordsCount = frequencies.size();
 
     return true;

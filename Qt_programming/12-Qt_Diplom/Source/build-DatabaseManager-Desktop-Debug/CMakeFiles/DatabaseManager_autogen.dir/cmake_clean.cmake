@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DatabaseManager_autogen"
   "DatabaseManager_autogen/mocs_compilation.cpp"
+  "DatabaseManager_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

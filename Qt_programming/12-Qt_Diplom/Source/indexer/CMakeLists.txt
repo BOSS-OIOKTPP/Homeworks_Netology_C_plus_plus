@@ -31,6 +31,3 @@ add_custom_command(TARGET indexer POST_BUILD
             $<TARGET_FILE_DIR:indexer>/config.ini
     COMMENT "Копирование config.ini рядом с indexer.exe"
 )
-
-install(TARGETS indexer
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

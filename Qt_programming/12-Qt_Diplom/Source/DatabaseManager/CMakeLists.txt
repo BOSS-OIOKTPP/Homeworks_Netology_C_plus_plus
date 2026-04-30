@@ -30,5 +30,3 @@ add_custom_command(TARGET DatabaseManager POST_BUILD
     COMMENT "Копирование config.ini рядом с DatabaseManager.exe"
 )
 
-install(TARGETS DatabaseManager
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
