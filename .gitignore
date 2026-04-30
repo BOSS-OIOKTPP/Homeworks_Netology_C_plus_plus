@@ -18,6 +18,8 @@ x86/
 **/__build-*/
 *.pro.user
 *.pro.user.*
+CMakeLists.txt.user
+CMakeLists.txt.user.*
 
 ##  Исключить все файлы .ilk и .pdb в любых подпапках
 *.ilk
