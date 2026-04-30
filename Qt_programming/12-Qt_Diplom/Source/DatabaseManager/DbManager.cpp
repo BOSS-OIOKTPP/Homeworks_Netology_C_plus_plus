@@ -9,6 +9,7 @@ DbManager::DbManager(QString configPath)
 {
 }
 
+// Закрывает соединение и корректно удаляет подключение из пула Qt.
 DbManager::~DbManager()
 {
     if (m_db.isValid() && m_db.isOpen()) {
@@ -21,6 +22,7 @@ DbManager::~DbManager()
     }
 }
 
+// Подключается к целевой БД и выполняет базовую серверную настройку сессии.
 bool DbManager::connectToDatabase(QString *errorMessage)
 {
     if (!loadConfig(errorMessage)) {
@@ -61,6 +63,7 @@ bool DbManager::connectToDatabase(QString *errorMessage)
     return true;
 }
 
+// Создает обязательные таблицы, если они еще не созданы.
 bool DbManager::createTables(bool *tablesAlreadyExist, QString *errorMessage)
 {
     if (!isOpen()) {
@@ -116,11 +119,18 @@ bool DbManager::createTables(bool *tablesAlreadyExist, QString *errorMessage)
     return true;
 }
 
+// Проверяет, открыто ли валидное соединение с БД.
 bool DbManager::isOpen() const
 {
     return m_db.isValid() && m_db.isOpen();
 }
 
+QSqlDatabase DbManager::database() const
+{
+    return m_db;
+}
+
+// Сохраняет одну частоту слова в документе (upsert документа, слова и связи).
 bool DbManager::saveDocumentWordFrequency(const QString &documentPath,
                                           const QString &word,
                                           int frequency,
@@ -153,6 +163,87 @@ bool DbManager::saveDocumentWordFrequency(const QString &documentPath,
     return upsertDocumentWordFrequency(documentId, wordId, frequency, errorMessage);
 }
 
+// Полностью переиндексирует документ: удаляет старые связи и пишет новый набор частот.
+bool DbManager::saveDocumentWordFrequencies(const QString &documentPath,
+                                            const QHash<QString, int> &frequencies,
+                                            QString *errorMessage)
+{
+    if (!isOpen()) {
+        if (errorMessage != nullptr) {
+            *errorMessage = QStringLiteral("Соединение с базой данных не открыто.");
+        }
+        return false;
+    }
+
+    const QString normalizedPath = documentPath.trimmed();
+    if (normalizedPath.isEmpty()) {
+        if (errorMessage != nullptr) {
+            *errorMessage = QStringLiteral("Некорректный путь документа для переиндексации.");
+        }
+        return false;
+    }
+
+    if (!m_db.transaction()) {
+        if (errorMessage != nullptr) {
+            *errorMessage = QStringLiteral("Не удалось начать транзакцию переиндексации: %1")
+                                .arg(m_db.lastError().text());
+        }
+        return false;
+    }
+
+    int documentId = 0;
+    if (!upsertDocument(normalizedPath, &documentId, errorMessage)) {
+        m_db.rollback();
+        return false;
+    }
+
+    QSqlQuery deleteQuery(m_db);
+    deleteQuery.prepare(QStringLiteral("DELETE FROM document_words WHERE document_id = :document_id;"));
+    deleteQuery.bindValue(QStringLiteral(":document_id"), documentId);
+    if (!deleteQuery.exec()) {
+        if (errorMessage != nullptr) {
+            *errorMessage = QStringLiteral("Не удалось очистить старые связи документа '%1': %2")
+                                .arg(normalizedPath, deleteQuery.lastError().text());
+        }
+        m_db.rollback();
+        return false;
+    }
+
+    for (auto it = frequencies.constBegin(); it != frequencies.constEnd(); ++it) {
+        if (it.value() < 0) {
+            if (errorMessage != nullptr) {
+                *errorMessage = QStringLiteral("Некорректная частота слова '%1' для документа '%2'.")
+                                    .arg(it.key(), normalizedPath);
+            }
+            m_db.rollback();
+            return false;
+        }
+
+        int wordId = 0;
+        if (!upsertWord(it.key().trimmed().toLower(), &wordId, errorMessage)) {
+            m_db.rollback();
+            return false;
+        }
+
+        if (!upsertDocumentWordFrequency(documentId, wordId, it.value(), errorMessage)) {
+            m_db.rollback();
+            return false;
+        }
+    }
+
+    if (!m_db.commit()) {
+        if (errorMessage != nullptr) {
+            *errorMessage = QStringLiteral("Не удалось завершить транзакцию переиндексации: %1")
+                                .arg(m_db.lastError().text());
+        }
+        m_db.rollback();
+        return false;
+    }
+
+    return true;
+}
+
+// Создает запись документа или получает существующую, возвращает id.
 bool DbManager::upsertDocument(const QString &documentPath, int *documentId, QString *errorMessage)
 {
     if (documentId == nullptr) {
@@ -182,6 +273,7 @@ bool DbManager::upsertDocument(const QString &documentPath, int *documentId, QSt
     return true;
 }
 
+// Создает запись слова или получает существующую, возвращает id.
 bool DbManager::upsertWord(const QString &word, int *wordId, QString *errorMessage)
 {
     if (wordId == nullptr) {
@@ -211,6 +303,7 @@ bool DbManager::upsertWord(const QString &word, int *wordId, QString *errorMessa
     return true;
 }
 
+// Создает или обновляет связь документа и слова с актуальной частотой.
 bool DbManager::upsertDocumentWordFrequency(int documentId, int wordId, int frequency, QString *errorMessage)
 {
     QSqlQuery query(m_db);
@@ -234,6 +327,7 @@ bool DbManager::upsertDocumentWordFrequency(int documentId, int wordId, int freq
     return true;
 }
 
+// Загружает параметры подключения к PostgreSQL из ini-файла.
 bool DbManager::loadConfig(QString *errorMessage)
 {
     QSettings settings(m_configPath, QSettings::IniFormat);
@@ -263,6 +357,7 @@ bool DbManager::loadConfig(QString *errorMessage)
     return true;
 }
 
+// Проверяет, что все три служебные таблицы индекса существуют.
 bool DbManager::areAllTablesExist(bool *allExist, QString *errorMessage)
 {
     if (allExist == nullptr) {
@@ -299,6 +394,7 @@ bool DbManager::areAllTablesExist(bool *allExist, QString *errorMessage)
     return true;
 }
 
+// Проверяет, что причина ошибки - отсутствующая БД, и инициирует ее создание.
 bool DbManager::tryCreateDatabaseIfMissing(QString *errorMessage)
 {
     const QString dbErrorText = m_db.lastError().text();
@@ -314,6 +410,7 @@ bool DbManager::tryCreateDatabaseIfMissing(QString *errorMessage)
     return createDatabase(errorMessage);
 }
 
+// Создает целевую БД через подключение к служебной БД postgres.
 bool DbManager::createDatabase(QString *errorMessage)
 {
     const QString adminConnectionName = QStringLiteral("dbmanager_admin_connection");

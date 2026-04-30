@@ -1,0 +1,4 @@
+D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/indexer.dir
+D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/INSTALL.dir
+D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/ALL_BUILD.dir
+D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/ZERO_CHECK.dir

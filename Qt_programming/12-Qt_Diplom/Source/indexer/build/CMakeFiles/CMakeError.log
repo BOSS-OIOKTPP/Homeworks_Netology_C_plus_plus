@@ -1,0 +1,59 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_a3524.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && ╨Т╨╡╤А╤Б╨╕╤П MSBuild 17.14.23+b0019275e ╨┤╨╗╤П .NET Framework
+
+  ╨Ю╨┐╤В╨╕╨╝╨╕╨╖╨╕╤А╤Г╤О╤Й╨╕╨╣ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤В╨╛╤А Microsoft (R) C/C++ ╨▓╨╡╤А╤Б╨╕╨╕ 19.44.35221 ╨┤╨╗╤П x64
+  (C) ╨Ъ╨╛╤А╨┐╨╛╤А╨░╤Ж╨╕╤П ╨Ь╨░╨╣╨║╤А╨╛╤Б╨╛╤Д╤В (Microsoft Corporation).  ╨Т╤Б╨╡ ╨┐╤А╨░╨▓╨░ ╨╖╨░╤Й╨╕╤Й╨╡╨╜╤Л.
+  cl /c /I"C:\Tools\vcpkg\installed\x64-windows\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_a3524.dir\Debug\\" /Fd"cmTC_a3524.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CMakeTmp\src.cxx"
+  src.cxx
+D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CMakeTmp\src.cxx(1,10): error C1083: ╨Э╨╡ ╤Г╨┤╨░╨╡╤В╤Б╤П ╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗ ╨▓╨║╨╗╤О╤З╨╡╨╜╨╕╨╡: pthread.h: No such file or directory, [D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CMakeTmp\cmTC_a3524.vcxproj]
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_abcb4.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && ╨Т╨╡╤А╤Б╨╕╤П MSBuild 17.14.23+b0019275e ╨┤╨╗╤П .NET Framework
+
+  ╨Ю╨┐╤В╨╕╨╝╨╕╨╖╨╕╤А╤Г╤О╤Й╨╕╨╣ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤В╨╛╤А Microsoft (R) C/C++ ╨▓╨╡╤А╤Б╨╕╨╕ 19.44.35221 ╨┤╨╗╤П x64
+  (C) ╨Ъ╨╛╤А╨┐╨╛╤А╨░╤Ж╨╕╤П ╨Ь╨░╨╣╨║╤А╨╛╤Б╨╛╤Д╤В (Microsoft Corporation).  ╨Т╤Б╨╡ ╨┐╤А╨░╨▓╨░ ╨╖╨░╤Й╨╕╤Й╨╡╨╜╤Л.
+  cl /c /I"C:\Tools\vcpkg\installed\x64-windows\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_abcb4.dir\Debug\\" /Fd"cmTC_abcb4.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CheckLibraryExists\CheckFunctionExists.cxx"
+  CheckFunctionExists.cxx
+LINK : fatal error LNK1104: ╨╜╨╡ ╤Г╨┤╨░╨╡╤В╤Б╤П ╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗ "pthreads.lib" [D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CMakeTmp\cmTC_abcb4.vcxproj]
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: D:/GIT_PROJECT/Homeworks_Netology_C_plus_plus/Qt_programming/12-Qt_Diplom/Source/indexer/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_a3ec0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && ╨Т╨╡╤А╤Б╨╕╤П MSBuild 17.14.23+b0019275e ╨┤╨╗╤П .NET Framework
+
+  ╨Ю╨┐╤В╨╕╨╝╨╕╨╖╨╕╤А╤Г╤О╤Й╨╕╨╣ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤В╨╛╤А Microsoft (R) C/C++ ╨▓╨╡╤А╤Б╨╕╨╕ 19.44.35221 ╨┤╨╗╤П x64
+  (C) ╨Ъ╨╛╤А╨┐╨╛╤А╨░╤Ж╨╕╤П ╨Ь╨░╨╣╨║╤А╨╛╤Б╨╛╤Д╤В (Microsoft Corporation).  ╨Т╤Б╨╡ ╨┐╤А╨░╨▓╨░ ╨╖╨░╤Й╨╕╤Й╨╡╨╜╤Л.
+  cl /c /I"C:\Tools\vcpkg\installed\x64-windows\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_a3ec0.dir\Debug\\" /Fd"cmTC_a3ec0.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CheckLibraryExists\CheckFunctionExists.cxx"
+  CheckFunctionExists.cxx
+LINK : fatal error LNK1104: ╨╜╨╡ ╤Г╨┤╨░╨╡╤В╤Б╤П ╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗ "pthread.lib" [D:\GIT_PROJECT\Homeworks_Netology_C_plus_plus\Qt_programming\12-Qt_Diplom\Source\indexer\build\CMakeFiles\CMakeTmp\cmTC_a3ec0.vcxproj]
+
+
+
