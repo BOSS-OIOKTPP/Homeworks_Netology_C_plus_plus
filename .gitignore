@@ -11,6 +11,15 @@ out/
 [Rr]elease/
 x64/
 x86/
+**/build-*/
+**/build*/
+**/cmake-build-*/
+**/__build/
+**/__build-*/
+*.pro.user
+*.pro.user.*
+CMakeLists.txt.user
+CMakeLists.txt.user.*
 
 ##  Исключить все файлы .ilk и .pdb в любых подпапках
 *.ilk

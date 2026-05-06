@@ -1,7 +1,0 @@
-build/
-build-*/
-CMakeLists.txt.user
-*.user
-*.autosave
-indexer.ini
-searcher.ini

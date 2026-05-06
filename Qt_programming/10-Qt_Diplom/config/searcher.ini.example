@@ -1,8 +1,0 @@
-; Скопируйте рядом с searcher.exe как searcher.ini
-
-[Database]
-Host = localhost
-Port = 5432
-Name = search_diplom
-User = postgres
-Password = your_password
